@@ -11,6 +11,14 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
     }
+    versionCatalogs {
+        create("core") {
+            from(files("version-catalog/core.toml"))
+        }
+        create("network") {
+            from(files("version-catalog/network.toml"))
+        }
+    }
 }
 
 rootProject.name = "WalltechTodo"

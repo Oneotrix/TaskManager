@@ -1,16 +1,17 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    alias(core.plugins.android.application)
+    alias(core.plugins.kotlin.android)
+    alias(core.plugins.kotlin.serialization)
 }
 
 android {
     namespace = "com.dirion.walltechtodo"
-    compileSdk = 34
+    compileSdk = core.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.dirion.walltechtodo"
-        minSdk = 26
-        targetSdk = 34
+        minSdk = core.versions.minSdk.get().toInt()
+        targetSdk = core.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
@@ -37,10 +38,16 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation(network.okhttp)
+    implementation(network.okhttp.loggingInterceptor)
+    implementation(network.retrofit)
+    implementation(network.retrofit.kotlinx.serialization)
+
+    implementation(core.androidx.ktx)
+    implementation(core.androidx.appcompat)
+    implementation(core.material)
+    implementation(core.constraintlayout)
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
