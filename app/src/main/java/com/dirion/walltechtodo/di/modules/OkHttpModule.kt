@@ -16,6 +16,7 @@ class OkHttpModule {
     ): OkHttpClient {
 
         return OkHttpClient.Builder()
+
             .addInterceptor(interceptor)
             .build()
     }

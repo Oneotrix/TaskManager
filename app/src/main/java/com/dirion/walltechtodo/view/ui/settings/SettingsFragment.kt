@@ -1,15 +1,15 @@
-package com.dirion.walltechtodo.view.tasks
+package com.dirion.walltechtodo.view.ui.settings
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.dirion.walltechtodo.databinding.FragmentTasksBinding
+import com.dirion.walltechtodo.databinding.FragmentSettingsBinding
 
-class TasksFragment: Fragment(){
+class SettingsFragment: Fragment(){
 
-    private lateinit var binding: FragmentTasksBinding
+    private lateinit var binding: FragmentSettingsBinding
 
 
     override fun onCreateView(
@@ -18,13 +18,14 @@ class TasksFragment: Fragment(){
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentTasksBinding.inflate(inflater, container, false)
+        binding = FragmentSettingsBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
 
     companion object {
-        fun newInstance() = TasksFragment()
+        fun newInstance() = SettingsFragment()
     }
 
 }

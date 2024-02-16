@@ -1,15 +1,15 @@
-package com.dirion.walltechtodo.view.notification
+package com.dirion.walltechtodo.view.ui.volume
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.dirion.walltechtodo.databinding.FragmentNotificationsBinding
+import com.dirion.walltechtodo.databinding.FragmentVolumeBinding
 
-class NotificationsFragment: Fragment(){
+class VolumeFragment: Fragment(){
 
-    private lateinit var binding: FragmentNotificationsBinding
+    private lateinit var binding: FragmentVolumeBinding
 
 
     override fun onCreateView(
@@ -18,14 +18,14 @@ class NotificationsFragment: Fragment(){
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        binding = FragmentVolumeBinding.inflate(inflater, container, false)
 
         return binding.root
     }
 
 
     companion object {
-        fun newInstance() = NotificationsFragment()
+        fun newInstance() = VolumeFragment()
     }
 
 }

@@ -1,15 +1,15 @@
-package com.dirion.walltechtodo.view.volume
+package com.dirion.walltechtodo.view.ui.data_time
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.dirion.walltechtodo.databinding.FragmentVolumeBinding
+import com.dirion.walltechtodo.databinding.FragmentDataTimeBinding
 
-class VolumeFragment: Fragment(){
+class DataTimeFragment: Fragment(){
 
-    private lateinit var binding: FragmentVolumeBinding
+    private lateinit var binding: FragmentDataTimeBinding
 
 
     override fun onCreateView(
@@ -18,14 +18,14 @@ class VolumeFragment: Fragment(){
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentVolumeBinding.inflate(inflater, container, false)
+        binding = FragmentDataTimeBinding.inflate(inflater, container, false)
 
         return binding.root
     }
 
 
     companion object {
-        fun newInstance() = VolumeFragment()
+        fun newInstance() = DataTimeFragment()
     }
 
 }

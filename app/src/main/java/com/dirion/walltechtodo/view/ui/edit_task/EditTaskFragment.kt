@@ -1,15 +1,15 @@
-package com.dirion.walltechtodo.view.add_task
+package com.dirion.walltechtodo.view.ui.edit_task
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.dirion.walltechtodo.databinding.FragmentAddTaskBinding
+import com.dirion.walltechtodo.databinding.FragmentEditTaskBinding
 
-class AddTaskFragment: Fragment(){
+class EditTaskFragment: Fragment(){
 
-    private lateinit var binding: FragmentAddTaskBinding
+    private lateinit var binding: FragmentEditTaskBinding
 
 
     override fun onCreateView(
@@ -18,14 +18,14 @@ class AddTaskFragment: Fragment(){
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentAddTaskBinding.inflate(inflater, container, false)
+        binding = FragmentEditTaskBinding.inflate(inflater, container, false)
 
         return binding.root
     }
 
 
     companion object {
-        fun newInstance() = AddTaskFragment()
+        fun newInstance() = EditTaskFragment()
     }
 
 }

@@ -1,4 +1,4 @@
-package com.dirion.walltechtodo.view.notes
+package com.dirion.walltechtodo.view.ui.notes
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.dirion.walltechtodo.databinding.FragmentNotesBinding
-import com.dirion.walltechtodo.view.names.NamesFragment
+import com.dirion.walltechtodo.view.ui.names.NamesFragment
 
 class NotesFragment: Fragment(){
 

@@ -6,12 +6,16 @@
     app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.dirion.walltechtodo.view.login.LoginFragment"
+        android:name="com.dirion.walltechtodo.view.ui.login.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login"/>
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_tasksFragment"
+            app:destination="@id/tasksFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addTaskFragment"
-        android:name="com.dirion.walltechtodo.view.add_task.AddTaskFragment"
+        android:name="com.dirion.walltechtodo.view.ui.add_task.AddTaskFragment"
         android:label="AddTaskFragment"
         tools:layout="@layout/fragment_add_task"
         >
@@ -21,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/dataTimeFragment"
-        android:name="com.dirion.walltechtodo.view.data_time.DataTimeFragment"
+        android:name="com.dirion.walltechtodo.view.ui.data_time.DataTimeFragment"
         android:label="DataTimeFragment"
         tools:layout="@layout/fragment_data_time"
         >
@@ -31,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/editTaskFragment"
-        android:name="com.dirion.walltechtodo.view.edit_task.EditTaskFragment"
+        android:name="com.dirion.walltechtodo.view.ui.edit_task.EditTaskFragment"
         android:label="EditTaskFragment"
         tools:layout="@layout/fragment_edit_task"
         >
@@ -41,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/namesFragment"
-        android:name="com.dirion.walltechtodo.view.names.NamesFragment"
+        android:name="com.dirion.walltechtodo.view.ui.names.NamesFragment"
         android:label="NamesFragment"
         tools:layout="@layout/fragment_names"
         >
@@ -51,7 +55,7 @@
     </fragment>
     <fragment
         android:id="@+id/notesFragment"
-        android:name="com.dirion.walltechtodo.view.notes.NotesFragment"
+        android:name="com.dirion.walltechtodo.view.ui.notes.NotesFragment"
         android:label="NotesFragment"
         tools:layout="@layout/fragment_notes"
         >
@@ -61,7 +65,7 @@
     </fragment>
     <fragment
         android:id="@+id/notificationsFragment"
-        android:name="com.dirion.walltechtodo.view.notification.NotificationsFragment"
+        android:name="com.dirion.walltechtodo.view.ui.notification.NotificationsFragment"
         android:label="NotificationsFragment"
         tools:layout="@layout/fragment_notifications"
         >
@@ -71,7 +75,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.dirion.walltechtodo.view.settings.SettingsFragment"
+        android:name="com.dirion.walltechtodo.view.ui.settings.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings"
         >
@@ -93,7 +97,7 @@
     </fragment>
     <fragment
         android:id="@+id/tasksFragment"
-        android:name="com.dirion.walltechtodo.view.tasks.TasksFragment"
+        android:name="com.dirion.walltechtodo.view.ui.tasks.TasksFragment"
         android:label="TasksFragment"
         tools:layout="@layout/fragment_tasks"
         >
@@ -109,7 +113,7 @@
     </fragment>
     <fragment
         android:id="@+id/volumeFragment"
-        android:name="com.dirion.walltechtodo.view.volume.VolumeFragment"
+        android:name="com.dirion.walltechtodo.view.ui.volume.VolumeFragment"
         android:label="VolumeFragment"
         tools:layout="@layout/fragment_volume"
         >

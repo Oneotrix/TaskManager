@@ -1,4 +1,4 @@
-package com.dirion.walltechtodo.view.names
+package com.dirion.walltechtodo.view.ui.names
 
 import android.os.Bundle
 import android.view.LayoutInflater
