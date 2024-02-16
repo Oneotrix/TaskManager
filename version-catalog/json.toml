@@ -1,0 +1,12 @@
+
+### Main dependencies catalogue shared between all of the projects  ###
+# Remember that "-" symbols in dependencie name will be converted into "."-notaion in build scripts
+
+[versions]
+# Serialization
+kotlinxSerialization = "1.6.2"
+
+
+[libraries]
+# Serialization
+kotlinx-serializarion = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization"}

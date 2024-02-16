@@ -16,6 +16,12 @@ ktx = "1.12.0"
 material = "1.11.0"
 constraintlayout = "2.1.4"
 
+# Navigation
+navigation = "2.7.7"
+
+# Dagger2
+dagger = "2.50"
+
 
 [libraries]
 # Core
@@ -26,9 +32,18 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { module = "com.google.android.material:material", version.ref = "material" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout"}
 
+# Navigation
+navigation-fragment  = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation"}
+navigation-ui  = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation"}
+
+# DI
+dagger-dagger = { module = "com.google.dagger:dagger", version.ref = "dagger"}
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlin-kapt = {id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin"}

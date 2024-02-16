@@ -2,6 +2,7 @@ plugins {
     alias(core.plugins.android.application)
     alias(core.plugins.kotlin.android)
     alias(core.plugins.kotlin.serialization)
+    alias(core.plugins.kotlin.kapt)
 }
 
 android {
@@ -34,6 +35,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -47,6 +51,16 @@ dependencies {
     implementation(core.androidx.appcompat)
     implementation(core.material)
     implementation(core.constraintlayout)
+
+    implementation(core.navigation.fragment)
+    implementation(core.navigation.ui)
+
+    implementation(core.dagger.dagger)
+    kapt(core.dagger.compiler)
+
+    implementation(json.kotlinx.serializarion)
+
+
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

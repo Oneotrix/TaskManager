@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/vgLinearTaskText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center|start"
+        android:layout_marginStart="20dp"
+        >
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/taskTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tool:text="Task"
+            android:textSize="18sp"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/taskStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            tool:text="To Do"
+            android:textStyle="italic"
+            />
+
+
+    </LinearLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvTaskId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#4"
+        android:layout_gravity="center|end"
+        android:layout_marginEnd="20dp"
+        />
+
+</FrameLayout>

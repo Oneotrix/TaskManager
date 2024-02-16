@@ -4,4 +4,5 @@ plugins {
     alias(core.plugins.kotlin.android) apply false
     alias(core.plugins.kotlin.jvm)
     alias(core.plugins.kotlin.serialization)
+    alias(core.plugins.kotlin.kapt)
 }

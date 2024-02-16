@@ -18,9 +18,12 @@ dependencyResolutionManagement {
         create("network") {
             from(files("version-catalog/network.toml"))
         }
+        create("json") {
+            from(files("version-catalog/json.toml"))
+        }
     }
 }
 
-rootProject.name = "WalltechTodo"
+rootProject.name = "walltechtodo"
 include(":app")
  
