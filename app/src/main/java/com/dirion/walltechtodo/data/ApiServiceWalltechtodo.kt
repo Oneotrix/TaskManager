@@ -15,7 +15,7 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Query
 
-interface ApiService {
+interface ApiServiceWalltechtodo {
 
     @POST("auth/login")
     fun login(

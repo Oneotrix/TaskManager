@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.dirion.walltechtodo.databinding.FragmentLoginBinding
-import com.dirion.walltechtodo.data.ApiService
+import com.dirion.walltechtodo.data.ApiServiceWalltechtodo
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
@@ -33,12 +33,12 @@ class LoginFragment: Fragment() {
         val contentType = "application/json".toMediaType()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl(ApiService.BASE_URL)
+            .baseUrl(ApiServiceWalltechtodo.BASE_URL)
             .addConverterFactory(getJson().asConverterFactory(contentType))
             .client(getOkHttpClient())
             .build()
 
-        retrofit.create(ApiService::class.java)
+        retrofit.create(ApiServiceWalltechtodo::class.java)
 
         return retrofit
     }
