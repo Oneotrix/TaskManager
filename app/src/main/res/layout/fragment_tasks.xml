@@ -35,7 +35,7 @@
 
     </FrameLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.dirion.walltechtodo.view.ui.tasks.recycler.CustomRecyclerView
         android:id="@+id/rvTasks"
         android:layout_width="match_parent"
         android:layout_height="0dp"

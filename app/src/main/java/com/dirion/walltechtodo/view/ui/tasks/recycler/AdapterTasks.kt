@@ -8,7 +8,7 @@ import com.dirion.walltechtodo.utils.Comparator
 import com.dirion.walltechtodo.view.ui.tasks.TaskModel
 
 class AdapterTasks: ListAdapter<TaskModel, TasksVH>
-    (Comparator.tasksListDiffUtil), ItemTouchHelperAdapter {
+    (Comparator.tasksListDiffUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TasksVH {
         return TasksVH(
             binding = ItemTasksListBinding.inflate(
@@ -23,11 +23,4 @@ class AdapterTasks: ListAdapter<TaskModel, TasksVH>
         holder.bind(getItem(position))
     }
 
-    override fun onItemDismiss(position: Int) {
-
-    }
-
-    fun showMenu(position: Int) {
-        getItem(position)
-    }
 }
