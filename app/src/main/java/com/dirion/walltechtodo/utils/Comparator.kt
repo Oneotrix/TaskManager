@@ -7,13 +7,13 @@ object Comparator {
 
     val tasksListDiffUtil = object: DiffUtil.ItemCallback<TaskModel>() {
         override fun areItemsTheSame(oldItem: TaskModel, newItem: TaskModel): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: TaskModel, newItem: TaskModel): Boolean {
-            return oldItem.status == newItem.status && oldItem.title == newItem.title
-        }
-
+        override fun areContentsTheSame(oldItem: TaskModel, newItem: TaskModel) =
+            oldItem.status == newItem.status &&
+            oldItem.title == newItem.title &&
+            oldItem.id == newItem.id
     }
 
 }

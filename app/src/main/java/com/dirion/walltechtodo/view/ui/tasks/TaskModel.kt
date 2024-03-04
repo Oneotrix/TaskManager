@@ -6,4 +6,5 @@ data class TaskModel(
     val title: String,
     val status: StatusTask,
     val id: Long,
+    var showDeleteButton: Boolean
 )
