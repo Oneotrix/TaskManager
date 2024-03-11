@@ -1,4 +1,4 @@
-package com.dirion.walltechtodo.di.modules
+package com.dirion.walltechtodo.di.presentation.modules
 
 import androidx.navigation.NavController
 import androidx.navigation.Navigation

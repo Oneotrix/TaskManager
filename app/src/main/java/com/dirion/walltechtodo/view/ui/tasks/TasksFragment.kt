@@ -1,21 +1,49 @@
 package com.dirion.walltechtodo.view.ui.tasks
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
+import com.dirion.walltechtodo.App
+import com.dirion.walltechtodo.MainActivity
 import com.dirion.walltechtodo.databinding.FragmentTasksBinding
-import com.dirion.walltechtodo.utils.TestData
+import com.dirion.walltechtodo.view.ui.BaseFragment
 import com.dirion.walltechtodo.view.ui.tasks.recycler.AdapterTasks
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import javax.inject.Inject
 
-class TasksFragment() : Fragment(){
+class TasksFragment : BaseFragment<FragmentTasksBinding>(FragmentTasksBinding::inflate){
 
-    private lateinit var binding: FragmentTasksBinding
+    @Inject
+    lateinit var viewModelFactory: TasksViewModelFactory
+
+    private val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[TasksViewModel::class.java]
+    }
+
     private val adapter by lazy {
-        AdapterTasks()
+        AdapterTasks(
+            callback = { data ->
+                viewModel.changeData(data)
+            }
+        )
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        App.presentationComponent
+            .tasksFragmentComponentBuilder()
+            .build()
+            .inject(this)
+
+        super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -24,15 +52,23 @@ class TasksFragment() : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentTasksBinding.inflate(inflater, container, false)
-        binding.rvTasks.adapter = adapter
-        setDecorator()
-        populateTasks()
-        return binding.root
+
+        viewModel.data
+            .onEach { adapter.submitList(it) }
+            .launchIn(lifecycleScope)
+
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
-    private fun populateTasks() {
-        adapter.submitList(TestData.taskList)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initRecycler()
+    }
+
+    private fun initRecycler() {
+        binding.rvTasks.adapter = adapter
+        setDecorator()
     }
 
     private fun setDecorator() {

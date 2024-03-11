@@ -41,26 +41,32 @@ android {
 }
 
 dependencies {
+    kapt(core.dagger.compiler)
 
+    // Network
     implementation(network.okhttp)
     implementation(network.okhttp.loggingInterceptor)
     implementation(network.retrofit)
     implementation(network.retrofit.kotlinx.serialization)
 
+    // UI
     implementation(core.androidx.ktx)
     implementation(core.androidx.appcompat)
     implementation(core.material)
     implementation(core.constraintlayout)
 
+    // Navigation
     implementation(core.navigation.fragment)
     implementation(core.navigation.ui)
 
+    // DI
     implementation(core.dagger.dagger)
-    kapt(core.dagger.compiler)
 
+    // Serialization
     implementation(json.kotlinx.serializarion)
 
-
+    // Asynchronously
+    implementation(core.coroutines)
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

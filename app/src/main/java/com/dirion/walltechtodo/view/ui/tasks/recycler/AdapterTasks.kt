@@ -9,7 +9,9 @@ import com.dirion.walltechtodo.view.ui.tasks.TaskModel
 import com.dirion.walltechtodo.view.ui.tasks.recycler.gesture.ItemDeleteListener
 
 
-class AdapterTasks: ListAdapter<TaskModel, TasksVH>
+class AdapterTasks(
+    private val callback: (List<TaskModel>) -> Unit
+): ListAdapter<TaskModel, TasksVH>
     (Comparator.tasksListDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TasksVH {
@@ -29,9 +31,10 @@ class AdapterTasks: ListAdapter<TaskModel, TasksVH>
                 val newList = mutableListOf<TaskModel>()
                 newList.addAll(this@AdapterTasks.currentList)
                 newList.removeAt(position)
-
                 this@AdapterTasks.submitList(newList)
                 this@AdapterTasks.notifyDataSetChanged()
+
+                callback.invoke(newList)
             }
         }
 

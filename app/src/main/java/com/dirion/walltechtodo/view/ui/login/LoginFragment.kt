@@ -19,7 +19,7 @@ class LoginFragment: Fragment() {
     ): View? {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         binding.btnLoggin.setOnClickListener {
-            (activity as MainActivity).activityComponent.navigationController()
+            MainActivity.activityComponent.navigationController()
                 .navigate(R.id.action_loginFragment_to_tasksFragment)
         }
 

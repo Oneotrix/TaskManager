@@ -1,7 +1,6 @@
-package com.dirion.walltechtodo.di.modules
+package com.dirion.walltechtodo.di.data.modules
 
 import android.util.Log
-import com.dirion.walltechtodo.di.scope.ScopeApplication
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -9,7 +8,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 
 @Module
 class OkHttpModule {
-    @ScopeApplication
     @Provides
     fun okHttpClient(
         interceptor: HttpLoggingInterceptor

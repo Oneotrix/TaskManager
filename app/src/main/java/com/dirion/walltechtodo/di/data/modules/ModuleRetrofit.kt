@@ -1,7 +1,6 @@
-package com.dirion.walltechtodo.di.modules
+package com.dirion.walltechtodo.di.data.modules
 
 import com.dirion.walltechtodo.data.ApiServiceWalltechtodo
-import com.dirion.walltechtodo.di.scope.ScopeApplication
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -15,13 +14,11 @@ import retrofit2.Retrofit
 @Module
 class ModuleRetrofit {
 
-    @ScopeApplication
     @Provides
     fun walltechtodoService(retrofit: Retrofit): ApiServiceWalltechtodo {
         return retrofit.create(ApiServiceWalltechtodo::class.java)
     }
 
-    @ScopeApplication
     @Provides
     fun retrofitService(
         convertedFactory: Converter.Factory,
