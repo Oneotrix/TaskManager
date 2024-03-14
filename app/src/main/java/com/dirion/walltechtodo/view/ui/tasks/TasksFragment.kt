@@ -1,7 +1,6 @@
 package com.dirion.walltechtodo.view.ui.tasks
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.dirion.walltechtodo.App
-import com.dirion.walltechtodo.MainActivity
 import com.dirion.walltechtodo.databinding.FragmentTasksBinding
 import com.dirion.walltechtodo.view.ui.BaseFragment
 import com.dirion.walltechtodo.view.ui.tasks.recycler.AdapterTasks
@@ -30,7 +28,7 @@ class TasksFragment : BaseFragment<FragmentTasksBinding>(FragmentTasksBinding::i
     private val adapter by lazy {
         AdapterTasks(
             callback = { data ->
-                viewModel.changeData(data)
+                viewModel.changeTasksList(data)
             }
         )
     }
@@ -54,7 +52,7 @@ class TasksFragment : BaseFragment<FragmentTasksBinding>(FragmentTasksBinding::i
 
 
         viewModel.data
-            .onEach { adapter.submitList(it) }
+            .onEach { adapter.submitList(it.tasks) }
             .launchIn(lifecycleScope)
 
         return super.onCreateView(inflater, container, savedInstanceState)

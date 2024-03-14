@@ -1,5 +1,6 @@
 package com.dirion.walltechtodo.di.data.modules
 
+import android.app.Application
 import android.util.Log
 import dagger.Module
 import dagger.Provides
@@ -12,9 +13,7 @@ class OkHttpModule {
     fun okHttpClient(
         interceptor: HttpLoggingInterceptor
     ): OkHttpClient {
-
         return OkHttpClient.Builder()
-
             .addInterceptor(interceptor)
             .build()
     }
@@ -25,5 +24,9 @@ class OkHttpModule {
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         return interceptor
     }
+
+
+
+
 
 }

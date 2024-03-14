@@ -11,6 +11,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Query
@@ -24,7 +25,10 @@ interface ApiServiceWalltechtodo {
     ): Call<LoginResponseModel>
 
     @GET("tasks/list")
-    fun getList(): Call<List<TaskResponseModel>>
+    fun getList(
+        @Header("Content-Type") contentType : String = "application/json",
+        @Header("Authorization") auth : String = "Testman1:123123",
+    ): Call<List<TaskResponseModel>>
     @GET("tasks/get")
     fun getTask(@Body data: TaskRequestModel): Call<TaskResponseModel>
 

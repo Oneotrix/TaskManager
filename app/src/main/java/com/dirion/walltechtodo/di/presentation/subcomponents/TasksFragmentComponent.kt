@@ -3,9 +3,7 @@ package com.dirion.walltechtodo.di.presentation.subcomponents
 import com.dirion.walltechtodo.view.ui.tasks.TasksFragment
 import dagger.Subcomponent
 
-@Subcomponent(
-
-)
+@Subcomponent
 interface TasksFragmentComponent {
 
 

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.dirion.walltechtodo.databinding.ItemTasksListBinding
 import com.dirion.walltechtodo.utils.Comparator
 import com.dirion.walltechtodo.view.ui.tasks.TaskModel
+import com.dirion.walltechtodo.view.ui.tasks.TasksViewModel
 import com.dirion.walltechtodo.view.ui.tasks.recycler.gesture.ItemDeleteListener
 
 
@@ -31,6 +32,7 @@ class AdapterTasks(
                 val newList = mutableListOf<TaskModel>()
                 newList.addAll(this@AdapterTasks.currentList)
                 newList.removeAt(position)
+
                 this@AdapterTasks.submitList(newList)
                 this@AdapterTasks.notifyDataSetChanged()
 
@@ -40,5 +42,6 @@ class AdapterTasks(
 
         holder.bind(getItem(position), listener)
     }
+
 
 }
