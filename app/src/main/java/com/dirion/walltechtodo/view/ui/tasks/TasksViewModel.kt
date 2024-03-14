@@ -3,6 +3,7 @@ package com.dirion.walltechtodo.view.ui.tasks
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dirion.walltechtodo.domain.models.TaskModelDomain
 import com.dirion.walltechtodo.domain.usecase.UseCaseGetTask
 import com.dirion.walltechtodo.view.mapper.DomainMapper
 import com.dirion.walltechtodo.view.ui.tasks.State.UiState
@@ -10,10 +11,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.getAndUpdate
+import kotlinx.coroutines.flow.retryWhen
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
+import java.lang.IllegalStateException
 
 class TasksViewModel(
     private val useCaseGetTask: UseCaseGetTask
@@ -24,28 +28,21 @@ class TasksViewModel(
 
     init {
         Log.d("TasksViewModel","Init")
+        collectData()
         fetchData()
     }
 
-    private fun fetchData() = viewModelScope.launch(Dispatchers.IO) {
-        try {
-            val res = useCaseGetTask.execute()
-           // val uiState = mutableListOf<UiState>()
-            res.collect { element ->
-                _data.getAndUpdate {tasks ->
-                    val newList = mutableListOf<TaskModel>()
-                    newList.addAll(DomainMapper.mapListTaskModelUi(element))
-                    tasks.copy(tasks = newList)
+    private fun collectData() = viewModelScope.launch {
+        useCaseGetTask.execute()
+            .collect { element ->
+                _data.getAndUpdate { tasks ->
+                    tasks.copy(tasks = element.let(DomainMapper::mapListTaskModelUi))
                 }
             }
-            _data.getAndUpdate { tasks ->
-                tasks.copy(tasks = DomainMapper.mapListTaskModelUi(emptyList()))
-            }
-            Log.d("TasksViewModel", "res : ${res}" )
-            Log.d("TasksViewModel", "_data : ${_data.value}" )
-        } catch (e : Exception) {
-            e.printStackTrace()
-        }
+    }
+
+    private fun fetchData() = viewModelScope.launch {
+        useCaseGetTask.fetch()
     }
 
     fun changeTasksList(tasks: List<TaskModel>) {

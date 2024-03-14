@@ -4,5 +4,6 @@ import com.dirion.walltechtodo.domain.models.TaskModelDomain
 import kotlinx.coroutines.flow.Flow
 
 interface TasksRepository {
-     suspend fun getTasks() : Flow<List<TaskModelDomain>>
+     fun getTasks() : Flow<List<TaskModelDomain>>
+     suspend fun fetchTasks()
 }
