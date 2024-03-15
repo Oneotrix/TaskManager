@@ -10,6 +10,7 @@ import okhttp3.Request
 @Module
 class TasksRepositoryModule {
 
+
     @Provides
     fun provideTasksRepository(
         okHttpClient: OkHttpClient,
@@ -19,12 +20,13 @@ class TasksRepositoryModule {
     }
 
     @Provides
-    fun provideTasksRequest() : Request {
+    fun provideGetTasksRequest() : Request {
         return Request.Builder()
             .url("http://walltech.me/tasks/list")
             .addHeader("Authorization", "Testman1:123123")
             .addHeader("Content-Type", "application/json")
             .build()
     }
+
 
 }

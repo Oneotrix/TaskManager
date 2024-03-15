@@ -1,7 +1,7 @@
 package com.dirion.walltechtodo.utils
 
 import androidx.recyclerview.widget.DiffUtil
-import com.dirion.walltechtodo.view.ui.tasks.TaskModel
+import com.dirion.walltechtodo.view.features.tasks.TaskModel
 
 object Comparator {
 

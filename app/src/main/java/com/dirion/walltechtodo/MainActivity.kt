@@ -2,7 +2,6 @@ package com.dirion.walltechtodo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.dirion.walltechtodo.di.presentation.subcomponents.ActivityComponent
 
 class MainActivity : AppCompatActivity() {

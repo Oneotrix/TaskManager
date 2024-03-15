@@ -1,7 +1,7 @@
 package com.dirion.walltechtodo.utils
 
 import com.dirion.walltechtodo.view.global.StatusTask
-import com.dirion.walltechtodo.view.ui.tasks.TaskModel
+import com.dirion.walltechtodo.view.features.tasks.TaskModel
 
 object TestData {
 
@@ -35,42 +35,50 @@ object TestData {
             status = StatusTask.DONE,
             id = 5,
             showDeleteButton = false
-        ),TaskModel(
+        ),
+        TaskModel(
             title = "Task6",
             status = StatusTask.UNDER_REVIEW,
             id = 6,
             showDeleteButton = false
-        ),TaskModel(
+        ),
+        TaskModel(
             title = "Task7",
             status = StatusTask.IN_PROGRESS,
             id = 7,
             showDeleteButton = false
-        ),TaskModel(
+        ),
+        TaskModel(
             title = "Task8",
             status = StatusTask.TO_DO,
             id = 8,
             showDeleteButton = false
-        ),TaskModel(
+        ),
+        TaskModel(
             title = "Task9",
             status = StatusTask.TO_DO,
             id = 9,
             showDeleteButton = false
-        ),TaskModel(
+        ),
+        TaskModel(
             title = "Task10",
             status = StatusTask.UNDER_REVIEW,
             id = 10,
             showDeleteButton = false
-        ),TaskModel(
+        ),
+        TaskModel(
             title = "Task11",
             status = StatusTask.DONE,
             id = 11,
             showDeleteButton = false
-        ),TaskModel(
+        ),
+        TaskModel(
             title = "Task12",
             status = StatusTask.TESTING,
             id = 12,
             showDeleteButton = false
-        ),TaskModel(
+        ),
+        TaskModel(
             title = "Task13",
             status = StatusTask.TESTING,
             id = 13,

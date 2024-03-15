@@ -1,6 +1,6 @@
 package com.dirion.walltechtodo.di.data.modules
 
-import com.dirion.walltechtodo.data.ApiServiceWalltechtodo
+import com.dirion.walltechtodo.data.ApiService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -15,8 +15,8 @@ import retrofit2.Retrofit
 class ModuleRetrofit {
 
     @Provides
-    fun walltechtodoService(retrofit: Retrofit): ApiServiceWalltechtodo {
-        return retrofit.create(ApiServiceWalltechtodo::class.java)
+    fun walltechtodoService(retrofit: Retrofit): ApiService {
+        return retrofit.create(ApiService::class.java)
     }
 
     @Provides
@@ -25,7 +25,7 @@ class ModuleRetrofit {
         okHttpClient: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(ApiServiceWalltechtodo.BASE_URL)
+            .baseUrl(ApiService.BASE_URL)
             .addConverterFactory(convertedFactory)
             .client(okHttpClient)
             .build()

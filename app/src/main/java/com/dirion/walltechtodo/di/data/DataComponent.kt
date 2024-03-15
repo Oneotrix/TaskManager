@@ -1,6 +1,6 @@
 package com.dirion.walltechtodo.di.data
 
-import com.dirion.walltechtodo.data.ApiServiceWalltechtodo
+import com.dirion.walltechtodo.data.ApiService
 import com.dirion.walltechtodo.di.data.modules.ModuleRetrofit
 import com.dirion.walltechtodo.di.data.modules.OkHttpModule
 import com.dirion.walltechtodo.di.scope.ScopeData
@@ -16,7 +16,7 @@ import okhttp3.OkHttpClient
 @ScopeData
 interface DataComponent {
 
-    fun walltechtodoService() : ApiServiceWalltechtodo
+    fun walltechtodoService() : ApiService
 
     fun clientOkHttp(): OkHttpClient
 
