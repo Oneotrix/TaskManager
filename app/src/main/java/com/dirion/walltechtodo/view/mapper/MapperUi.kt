@@ -6,20 +6,7 @@ import com.dirion.walltechtodo.view.features.tasks.TaskModel
 
 object MapperUi {
 
-    fun mapListTaskModelUi(
-        models: List<TaskModelDomain>
-    ): List<TaskModel> {
-        val list = mutableListOf<TaskModel>()
-
-        models.forEach {
-            list.add(mapTaskModelUi(it))
-        }
-
-        return list
-
-    }
-
-    private fun mapTaskModelUi(
+    fun mapTaskModelUi(
         taskModelDomain: TaskModelDomain
     ): TaskModel {
 

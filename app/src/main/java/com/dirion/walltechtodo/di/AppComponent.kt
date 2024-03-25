@@ -1,6 +1,7 @@
 package com.dirion.walltechtodo.di
 
 import com.dirion.walltechtodo.di.data.DataComponent
+import com.dirion.walltechtodo.di.data.modules.ModuleRetrofit
 import com.dirion.walltechtodo.di.data.modules.OkHttpModule
 import com.dirion.walltechtodo.di.domain.DomainComponent
 import com.dirion.walltechtodo.di.domain.module.TasksRepositoryModule
@@ -14,6 +15,7 @@ import dagger.Component
         AppSubcomponents::class,
         TasksRepositoryModule::class,
         OkHttpModule::class,
+        ModuleRetrofit::class,
     ],
 )
 interface AppComponent {

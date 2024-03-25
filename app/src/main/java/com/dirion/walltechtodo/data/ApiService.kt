@@ -1,51 +1,52 @@
 package com.dirion.walltechtodo.data
 
 import com.dirion.walltechtodo.data.models.network.rest.request.delete.DeleteTaskModelRequest
-import com.dirion.walltechtodo.data.models.network.rest.request.get.GetTasksModelRequest
 import com.dirion.walltechtodo.data.models.network.rest.request.post.PostAddTaskModelRequest
+import com.dirion.walltechtodo.data.models.network.rest.request.post.PostLoginModelRequest
 import com.dirion.walltechtodo.data.models.network.rest.request.put.PutUpdateTaskModelRequest
 import com.dirion.walltechtodo.data.models.network.rest.response.BaseModelResponse
-import com.dirion.walltechtodo.data.models.network.rest.response.PostLoginModelRespose
-import com.dirion.walltechtodo.data.models.network.rest.response.GetTaskModelResponce
-import retrofit2.Call
+import com.dirion.walltechtodo.data.models.network.rest.response.DeleteTaskModelResponse
+import com.dirion.walltechtodo.data.models.network.rest.response.GetTaskModelResponse
+import com.dirion.walltechtodo.data.models.network.rest.response.PostAddTaskModelResponse
+import com.dirion.walltechtodo.data.models.network.rest.response.PostLoginModelResponse
+import com.dirion.walltechtodo.data.models.network.rest.response.PutUpdateTaskModelResponse
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
-import retrofit2.http.Query
 
 interface ApiService {
-
     @POST("auth/login")
-    fun login(
-        @Query("password") password: String,
-        @Query("username") username: String,
-    ): Call<PostLoginModelRespose>
-
+    suspend fun login(
+        @Body data: PostLoginModelRequest
+    ): PostLoginModelResponse
     @GET("tasks/list")
-    fun getList(
-        @Header("Content-Type") contentType : String = "application/json",
-        @Header("Authorization") auth : String = "Testman1:123123",
-    ): Call<List<GetTaskModelResponce>>
+    suspend fun getTasks(
+        @Header("Authorization") authorization: String,
+    ): List<GetTaskModelResponse>
     @GET("tasks/get")
-    fun getTask(@Body data: GetTasksModelRequest): Call<GetTaskModelResponce>
-
-    //TODO response???
+    suspend fun getTask(
+        @Header("Authorization") authorization: String,
+    ): GetTaskModelResponse
     @POST("tasks/add")
-    fun addTask(@Body data: PostAddTaskModelRequest): Call<BaseModelResponse>
-
-    //TODO response???
+    suspend fun addTask(
+        @Header("Authorization") authorization: String,
+        @Body data: PostAddTaskModelRequest
+    ): BaseModelResponse<PostAddTaskModelResponse>
     @PUT("tasks/update")
-    fun updateTask(@Body data: PutUpdateTaskModelRequest): Call<BaseModelResponse>
-
-    //TODO response???
+    suspend fun updateTask(
+        @Header("Authorization") authorization: String,
+        @Body data: PutUpdateTaskModelRequest
+    ): BaseModelResponse<PutUpdateTaskModelResponse>
     @DELETE("tasks/remove")
-    fun deleteTask(@Body data: DeleteTaskModelRequest): Call<BaseModelResponse>
-
+    suspend fun deleteTask(
+        @Header("Authorization") authorization: String,
+        @Body data: DeleteTaskModelRequest
+    ): BaseModelResponse<DeleteTaskModelResponse>
 
     companion object {
-        val BASE_URL = "http://walltech.me/"
+        const val BASE_URL = "http://walltech.me/"
     }
 }

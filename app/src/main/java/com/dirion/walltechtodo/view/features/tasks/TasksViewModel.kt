@@ -2,6 +2,7 @@ package com.dirion.walltechtodo.view.features.tasks
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dirion.walltechtodo.domain.models.BaseDomainModel.*
 import com.dirion.walltechtodo.domain.usecase.UseCaseGetTask
 import com.dirion.walltechtodo.view.features.tasks.TasksViewModel.State.UiState
 import com.dirion.walltechtodo.view.mapper.MapperUi
@@ -22,9 +23,28 @@ class TasksViewModel(
     }
 
     private fun fetchData() = viewModelScope.launch {
-            val tasks = MapperUi.mapListTaskModelUi(useCaseGetTask.fetch())
-            _data.value = UiState(tasks = tasks)
+        val data = useCaseGetTask.fetch()
+
+        when (data){
+            is Success -> {
+                val tasks = data.data
+                    ?.map { model ->
+                        MapperUi.mapTaskModelUi(model)
+                    }
+                    ?: emptyList()
+
+                _data.value = UiState(tasks = tasks)
+            }
+
+            else -> {
+                /*TODO change to show bar with error */
+                _data.value = UiState(tasks = emptyList())
+            }
+        }
+
+
     }
+
 
     fun changeTasksList(tasks: List<TaskModel>) = viewModelScope.launch{
         _data.emit(UiState(tasks))
@@ -33,7 +53,6 @@ class TasksViewModel(
 
     sealed class State {
         data class UiState(val tasks: List<TaskModel> = emptyList())
-
     }
 }
 
