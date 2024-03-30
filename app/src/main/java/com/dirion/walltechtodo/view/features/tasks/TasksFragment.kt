@@ -9,8 +9,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.dirion.walltechtodo.App
+import com.dirion.walltechtodo.MainActivity
+import com.dirion.walltechtodo.R
 import com.dirion.walltechtodo.databinding.FragmentTasksBinding
 import com.dirion.walltechtodo.view.features.BaseFragment
+import com.dirion.walltechtodo.view.features.add_task.AddTaskFragment
 import com.dirion.walltechtodo.view.features.tasks.recycler.AdapterTasks
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -48,17 +51,28 @@ class TasksFragment : BaseFragment<FragmentTasksBinding>(FragmentTasksBinding::i
         savedInstanceState: Bundle?
     ): View? {
 
-        viewModel.data
-            .onEach { adapter.submitList(it.tasks) }
-            .launchIn(lifecycleScope)
+        observeData()
 
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.icAddTask.setOnClickListener {
+            val dialogFragment = AddTaskFragment.newInstance()
+
+            dialogFragment.show(parentFragmentManager, null)
+        }
+
         initRecycler()
+    }
+
+    private fun observeData() {
+        viewModel.data
+            .onEach { adapter.submitList(it.tasks) }
+            .launchIn(lifecycleScope)
     }
 
     private fun initRecycler() {

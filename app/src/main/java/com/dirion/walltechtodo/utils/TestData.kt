@@ -1,5 +1,6 @@
 package com.dirion.walltechtodo.utils
 
+import com.dirion.walltechtodo.view.features.add_task.AddTaskModel
 import com.dirion.walltechtodo.view.global.StatusTask
 import com.dirion.walltechtodo.view.features.tasks.TaskModel
 
@@ -85,6 +86,11 @@ object TestData {
             showDeleteButton = false
         ),
 
+    )
+
+    var addTaskModel = AddTaskModel(
+        taskName = "",
+        categories = StatusTask.entries.associateWith { false }
     )
 
 }

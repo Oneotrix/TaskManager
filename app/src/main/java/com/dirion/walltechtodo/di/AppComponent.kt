@@ -8,6 +8,7 @@ import com.dirion.walltechtodo.di.domain.module.TasksRepositoryModule
 import com.dirion.walltechtodo.di.presentation.PresentationComponent
 import com.dirion.walltechtodo.di.scope.ScopeApplication
 import dagger.Component
+import javax.inject.Singleton
 
 @ScopeApplication
 @Component(

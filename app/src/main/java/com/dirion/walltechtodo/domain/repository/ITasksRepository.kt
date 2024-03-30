@@ -6,7 +6,7 @@ import com.dirion.walltechtodo.domain.models.TaskModelDomain
 interface ITasksRepository {
      suspend fun fetchTasks() : BaseDomainModel<List<TaskModelDomain>>
 
-     suspend fun addTask() : BaseDomainModel<TaskModelDomain>
+     suspend fun addTask(name: String, status: String) : BaseDomainModel<TaskModelDomain>
 
      suspend fun login(username: String, password: String) : BaseDomainModel<String>
 }

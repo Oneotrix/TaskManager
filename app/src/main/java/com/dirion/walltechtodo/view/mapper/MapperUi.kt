@@ -11,11 +11,11 @@ object MapperUi {
     ): TaskModel {
 
         val status = when(taskModelDomain.status) {
-            StatusTask.TO_DO.status -> StatusTask.DONE
-            StatusTask.IN_PROGRESS.status -> StatusTask.IN_PROGRESS
-            StatusTask.UNDER_REVIEW.status -> StatusTask.UNDER_REVIEW
-            StatusTask.TESTING.status -> StatusTask.DONE
-            StatusTask.DONE.status -> StatusTask.DONE
+            StatusTask.TO_DO.statusTitle -> StatusTask.DONE
+            StatusTask.IN_PROGRESS.statusTitle -> StatusTask.IN_PROGRESS
+            StatusTask.UNDER_REVIEW.statusTitle -> StatusTask.UNDER_REVIEW
+            StatusTask.TESTING.statusTitle -> StatusTask.DONE
+            StatusTask.DONE.statusTitle -> StatusTask.DONE
             else -> error("error Model")
         }
 

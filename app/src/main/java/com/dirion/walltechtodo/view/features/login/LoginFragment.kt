@@ -4,21 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.dirion.walltechtodo.App
 import com.dirion.walltechtodo.MainActivity
 import com.dirion.walltechtodo.R
 import com.dirion.walltechtodo.databinding.FragmentLoginBinding
-import com.dirion.walltechtodo.view.features.login.LoginViewModel.LoginState.*
+import com.dirion.walltechtodo.view.features.BaseFragment
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
-class LoginFragment: Fragment() {
-
-    private lateinit var binding: FragmentLoginBinding
+class LoginFragment: BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
     private val viewModel: LoginViewModel by viewModels { viewModelFactory }
 
@@ -40,11 +38,28 @@ class LoginFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentLoginBinding.inflate(inflater, container, false)
+
+        super.onCreateView(inflater, container, savedInstanceState)
 
         setupListeners()
+        setupObservers()
 
         return binding.root
+    }
+
+    private fun setupObservers() {
+        observeEvents()
+    }
+
+    private fun observeEvents() {
+        viewModel.events
+            .onEach { event->
+                when(event) {
+                    is LoginViewModel.Event.LoginSuccess -> navigateToTasks()
+                    is LoginViewModel.Event.LoginError -> showErrorSnackbar(event.message)
+                }
+            }
+            .launchIn(lifecycleScope)
     }
 
     private fun setupListeners() {
@@ -52,25 +67,11 @@ class LoginFragment: Fragment() {
     }
 
     private fun setupLoginClickListener() {
-
         binding.btnLoggin.setOnClickListener {
             val username = binding.textInputUsername.text.toString()
             val password = binding.textInputPassword.text.toString()
 
-            lifecycleScope.launch {
-                val auth = viewModel.login(username, password)
-
-                when(auth) {
-                    is Success -> {
-                        navigateToTasks()
-                    }
-
-                    is Error -> {
-                        showErrorSnackbar(auth.message)
-                    }
-                }
-            }
-
+            viewModel.login(username, password)
         }
     }
 

@@ -34,7 +34,7 @@ interface ApiService {
     suspend fun addTask(
         @Header("Authorization") authorization: String,
         @Body data: PostAddTaskModelRequest
-    ): BaseModelResponse<PostAddTaskModelResponse>
+    ): PostAddTaskModelResponse
     @PUT("tasks/update")
     suspend fun updateTask(
         @Header("Authorization") authorization: String,

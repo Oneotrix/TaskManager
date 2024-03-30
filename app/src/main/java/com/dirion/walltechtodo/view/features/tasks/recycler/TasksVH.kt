@@ -43,7 +43,7 @@ class TasksVH(
 
         this@TasksVH.model = model
         if(deleteButton == null) attachDeleteButton()
-        tvTaskStatus.text = model.status.status
+        tvTaskStatus.text = model.status.statusTitle
         tvTaskTitle.text = model.title
         tvTaskId.text = "#${model.id}"
         callbackDelete = callbackDeleteItem
