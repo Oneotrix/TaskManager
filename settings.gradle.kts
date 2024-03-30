@@ -21,6 +21,9 @@ dependencyResolutionManagement {
         create("json") {
             from(files("version-catalog/json.toml"))
         }
+        create("storage") {
+            from(files("version-catalog/storage.toml"))
+        }
     }
 }
 

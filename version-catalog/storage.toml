@@ -1,0 +1,12 @@
+### Storage dependencies catalog shared between all of the projects  ###
+# Remember that "-" symbols in dependencie name will be converted into "."-notaion in build scripts
+[versions]
+#Room
+room = "2.6.1"
+
+[libraries]
+
+#Room
+room-runtime = {module = "androidx.room:room-runtime", version.ref = "room"}
+room-compiler = {module = "androidx.room:room-compiler", version.ref = "room"}
+room-ktx = {module = "androidx.room:room-ktx", version.ref = "room"}

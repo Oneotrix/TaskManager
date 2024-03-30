@@ -1,12 +1,15 @@
 package com.dirion.walltechtodo.di
 
+import android.content.Context
 import com.dirion.walltechtodo.di.data.DataComponent
 import com.dirion.walltechtodo.di.data.modules.ModuleRetrofit
 import com.dirion.walltechtodo.di.data.modules.OkHttpModule
+import com.dirion.walltechtodo.di.data.modules.RoomModule
 import com.dirion.walltechtodo.di.domain.DomainComponent
 import com.dirion.walltechtodo.di.domain.module.TasksRepositoryModule
 import com.dirion.walltechtodo.di.presentation.PresentationComponent
 import com.dirion.walltechtodo.di.scope.ScopeApplication
+import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
@@ -17,6 +20,7 @@ import javax.inject.Singleton
         TasksRepositoryModule::class,
         OkHttpModule::class,
         ModuleRetrofit::class,
+        RoomModule::class
     ],
 )
 interface AppComponent {
@@ -29,6 +33,10 @@ interface AppComponent {
 
     @Component.Builder
     interface Builder {
+
+        @BindsInstance
+        fun context(context: Context) : Builder
+
         fun build(): AppComponent
     }
 }

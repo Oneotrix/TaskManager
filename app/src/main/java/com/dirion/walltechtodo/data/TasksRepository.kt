@@ -1,5 +1,6 @@
 package com.dirion.walltechtodo.data
 
+import com.dirion.walltechtodo.data.datasource.local.LocalDataSource
 import com.dirion.walltechtodo.data.datasource.remote.NetworkDataSource
 import com.dirion.walltechtodo.data.mapper.MapperResponse
 import com.dirion.walltechtodo.data.models.network.rest.request.post.PostAddTaskModelRequest
@@ -13,8 +14,8 @@ import javax.inject.Inject
 
 @ScopeApplication
 class TasksRepository @Inject constructor(
-    val networkDataSource: NetworkDataSource
-    //local data source
+    val networkDataSource: NetworkDataSource,
+    val localDataSource:  LocalDataSource,
 ): ITasksRepository {
 
     override suspend fun fetchTasks(): BaseDomainModel<List<TaskModelDomain>> {
@@ -26,11 +27,11 @@ class TasksRepository @Inject constructor(
                     ?.map { model ->
                         MapperResponse.mapTaskModel(model)
                     } ?: emptyList()
-                return BaseDomainModel.Success(data = data)
+                BaseDomainModel.Success(data = data)
             }
 
             is Error -> {
-                return BaseDomainModel.Error(message = response.message)
+                BaseDomainModel.Error(message = response.message)
             }
         }
     }

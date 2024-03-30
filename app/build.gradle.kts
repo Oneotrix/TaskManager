@@ -42,6 +42,8 @@ android {
 
 dependencies {
     kapt(core.dagger.compiler)
+    kapt(storage.room.compiler)
+
 
     // Network
     implementation(network.okhttp)
@@ -67,6 +69,12 @@ dependencies {
 
     // Asynchronously
     implementation(core.coroutines)
+
+    //Database
+    implementation(storage.room.runtime)
+    implementation(storage.room.ktx)
+
+
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

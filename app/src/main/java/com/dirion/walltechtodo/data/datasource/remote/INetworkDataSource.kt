@@ -1,4 +1,4 @@
-package com.dirion.walltechtodo.data.datasource
+package com.dirion.walltechtodo.data.datasource.remote
 
 import com.dirion.walltechtodo.data.models.network.rest.request.delete.DeleteTaskModelRequest
 import com.dirion.walltechtodo.data.models.network.rest.request.get.GetTasksModelRequest
@@ -14,16 +14,16 @@ import com.dirion.walltechtodo.data.models.network.rest.response.PutUpdateTaskMo
 
 interface INetworkDataSource {
 
-    suspend fun getTasksList(url: String = "tasks/list") : BaseModelResponse<List<GetTaskModelResponse>>
+    suspend fun getTasksList() : BaseModelResponse<List<GetTaskModelResponse>>
 
-    suspend fun getTask(url: String = "tasks/get", data: GetTasksModelRequest) : BaseModelResponse<GetTaskModelResponse>
+    suspend fun getTask(data: GetTasksModelRequest) : BaseModelResponse<GetTaskModelResponse>
 
-    suspend fun login(url: String = "auth/login", data: PostLoginModelRequest) : BaseModelResponse<PostLoginModelResponse>
+    suspend fun login(data: PostLoginModelRequest) : BaseModelResponse<PostLoginModelResponse>
 
-    suspend fun addTask(url: String = "tasks/add", data: PostAddTaskModelRequest) : BaseModelResponse<PostAddTaskModelResponse>
+    suspend fun addTask(data: PostAddTaskModelRequest) : BaseModelResponse<PostAddTaskModelResponse>
 
-    suspend fun updateTask(url: String = "tasks/update", data: PutUpdateTaskModelRequest) : BaseModelResponse<PutUpdateTaskModelResponse>
+    suspend fun updateTask(data: PutUpdateTaskModelRequest) : BaseModelResponse<PutUpdateTaskModelResponse>
 
-    suspend fun deleteTask(url: String = "tasks/remove", data: DeleteTaskModelRequest) : BaseModelResponse<DeleteTaskModelResponse>
+    suspend fun deleteTask(data: DeleteTaskModelRequest) : BaseModelResponse<DeleteTaskModelResponse>
 
 }
