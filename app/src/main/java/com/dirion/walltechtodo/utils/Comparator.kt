@@ -36,6 +36,33 @@ object Comparator {
         }
     }
 
+    val updateTaskDiffUtil = object: DiffUtil.ItemCallback<com.dirion.walltechtodo.view.features.edit_task.recycler.StatusVhModel>() {
+        override fun areItemsTheSame(
+            oldItem: com.dirion.walltechtodo.view.features.edit_task.recycler.StatusVhModel,
+            newItem: com.dirion.walltechtodo.view.features.edit_task.recycler.StatusVhModel
+        ): Boolean {
+            return oldItem.status == newItem.status
+        }
+
+        override fun areContentsTheSame(
+            oldItem: com.dirion.walltechtodo.view.features.edit_task.recycler.StatusVhModel,
+            newItem: com.dirion.walltechtodo.view.features.edit_task.recycler.StatusVhModel
+        ): Boolean {
+            return oldItem.isChecked == newItem.isChecked
+        }
+
+        override fun getChangePayload(
+            oldItem: com.dirion.walltechtodo.view.features.edit_task.recycler.StatusVhModel,
+            newItem: com.dirion.walltechtodo.view.features.edit_task.recycler.StatusVhModel
+        ): Any? {
+            return when(oldItem.isChecked == newItem.isChecked) {
+                true -> super.getChangePayload(oldItem, newItem)
+                false -> AddTaskPayload.Switcher(newItem.isChecked)
+            }
+        }
+
+    }
+
 
     sealed interface AddTaskPayload {
         data class Switcher(val isChecked: Boolean) : AddTaskPayload

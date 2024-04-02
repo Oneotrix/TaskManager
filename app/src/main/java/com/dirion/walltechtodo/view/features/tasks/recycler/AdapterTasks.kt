@@ -10,7 +10,8 @@ import com.dirion.walltechtodo.view.features.tasks.recycler.gesture.ItemDeleteLi
 
 
 class AdapterTasks(
-    private val callback: (List<TaskModel>) -> Unit
+    private val callbackDeleteTask: (List<TaskModel>) -> Unit,
+    private val callbackEditTask: (Long) -> Unit
 ): ListAdapter<TaskModel, TasksVH>
     (Comparator.tasksListDiffUtil) {
 
@@ -21,6 +22,7 @@ class AdapterTasks(
                 parent,
                 false
             ),
+            callbackEditTask = callbackEditTask
         )
     }
 
@@ -35,7 +37,7 @@ class AdapterTasks(
                 this@AdapterTasks.submitList(newList)
                 this@AdapterTasks.notifyDataSetChanged()
 
-                callback.invoke(newList)
+                callbackDeleteTask.invoke(newList)
             }
         }
 

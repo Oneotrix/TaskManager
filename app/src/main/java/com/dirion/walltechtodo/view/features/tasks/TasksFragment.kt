@@ -1,7 +1,6 @@
 package com.dirion.walltechtodo.view.features.tasks
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import com.dirion.walltechtodo.App
 import com.dirion.walltechtodo.databinding.FragmentTasksBinding
 import com.dirion.walltechtodo.view.features.BaseFragment
 import com.dirion.walltechtodo.view.features.add_task.AddTaskFragment
+import com.dirion.walltechtodo.view.features.edit_task.EditTaskFragment
 import com.dirion.walltechtodo.view.features.tasks.recycler.AdapterTasks
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -27,8 +27,11 @@ class TasksFragment : BaseFragment<FragmentTasksBinding>(FragmentTasksBinding::i
 
     private val adapter by lazy {
         AdapterTasks(
-            callback = { data ->
+            callbackDeleteTask = { data ->
                 viewModel.changeTasksList(data)
+            },
+            callbackEditTask = { id ->
+                showEditTaskFragment(id)
             }
         )
     }
@@ -69,6 +72,12 @@ class TasksFragment : BaseFragment<FragmentTasksBinding>(FragmentTasksBinding::i
         }
 
         initRecycler()
+    }
+
+    private fun showEditTaskFragment(taskId: Long) {
+        val dialogFragment = EditTaskFragment.newInstance(taskId = taskId)
+
+        dialogFragment.show(parentFragmentManager, null)
     }
 
     private fun observeData() {

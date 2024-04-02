@@ -7,11 +7,9 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 @ScopeApplication
 class UseCaseGetTask @Inject constructor(
-    private val ITasksRepository: ITasksRepository,
+    private val tasksRepository: ITasksRepository
 ) {
-
-     suspend fun fetch() = withContext(Dispatchers.IO) {
-         return@withContext ITasksRepository.fetchTasks()
+    suspend fun fetchTask(id: Long) = withContext(Dispatchers.IO) {
+        tasksRepository.getTask(id)
     }
-
 }

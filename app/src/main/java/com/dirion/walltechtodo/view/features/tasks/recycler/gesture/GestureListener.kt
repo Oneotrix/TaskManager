@@ -6,7 +6,8 @@ import android.view.MotionEvent
 import kotlin.math.abs
 
 abstract class GestureListener(
-    flag: Boolean
+    flag: Boolean,
+    private val onEditCallback: () -> Unit
 ): SimpleOnGestureListener() {
 
         private val SWIPE_THRESHOLD = 100;
@@ -58,4 +59,9 @@ abstract class GestureListener(
 
         abstract fun onSwipeToDismiss()
 
+
+    override fun onSingleTapUp(e: MotionEvent): Boolean {
+        onEditCallback.invoke()
+        return super.onSingleTapUp(e)
+    }
 }

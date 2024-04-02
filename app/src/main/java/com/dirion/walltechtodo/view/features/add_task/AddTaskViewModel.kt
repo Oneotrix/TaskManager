@@ -17,11 +17,12 @@ class AddTaskViewModel(
 
 
     fun updateStatusTask(statusTask: StatusTask) = viewModelScope.launch {
+        val currentStatusTaskValue = _data.value.statusTask.categories[statusTask]!!
         val categories = StatusTask.entries
             .associateWith { false }
             .toMutableMap()
 
-        categories[statusTask] = true
+        categories[statusTask] = currentStatusTaskValue.not()
 
         val newState = UiState.SwitchersState(
             statusTask = AddTaskModel(

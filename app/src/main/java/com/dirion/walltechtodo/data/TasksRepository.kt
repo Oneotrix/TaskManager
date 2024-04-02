@@ -74,6 +74,19 @@ class TasksRepository @Inject constructor(
         }
     }
 
+    override suspend fun updateTask(username: String, password: String) {
+
+    }
+
+    override suspend fun getTask(id: Long): BaseDomainModel<TaskModelDomain> {
+        return try {
+            val task = localDataSource.getTask(id)
+            BaseDomainModel.Success(MapperResponse.mapToDomain(task))
+        } catch (e: Exception) {
+            return BaseDomainModel.Error(e.message ?: "error")
+        }
+    }
+
 }
 
 

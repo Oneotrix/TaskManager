@@ -59,17 +59,17 @@ class AddTaskFragment: BottomSheetDialogFragment(){
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         inflateBinding(inflater, container)
         attachRecycler()
-        setAddTask()
+        setAddTaskListener()
         observeState()
         
         return binding.root
     }
 
-    private fun setAddTask() {
+    private fun setAddTaskListener() {
         binding.tvAddTask.setOnClickListener {
             viewModel.addTask(binding.etTaskName.text.toString()).invokeOnCompletion {
                 onAddTask!!.invoke()

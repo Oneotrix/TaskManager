@@ -6,6 +6,7 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.view.Gravity
 import android.view.ViewGroup.LayoutParams
 import android.view.ViewGroup.TEXT_ALIGNMENT_CENTER
@@ -22,6 +23,7 @@ import com.dirion.walltechtodo.view.features.tasks.recycler.gesture.OnSwipeTouch
 
 class TasksVH(
     val binding: ItemTasksListBinding,
+    val callbackEditTask : (Long) -> Unit
 ): ViewHolder(binding.root) {
 
     private var deleteButton: TextView? = null
@@ -50,11 +52,12 @@ class TasksVH(
 
         setupTranslationsX()
 
+
         flag = calculateFlag()
 
         setupListeners(binding.root.context)
-
     }
+
 
     private fun calculateFlag(): Boolean {
         return binding.vgMainContent.translationX == -deleteButtonWidth
@@ -77,7 +80,12 @@ class TasksVH(
     }
 
     private fun setupListeners(context: Context) {
-        binding.root.setOnTouchListener(OnSwipeTouchListener(context, object : GestureListener(flag) {
+        binding.root.setOnTouchListener(OnSwipeTouchListener(context, object : GestureListener(
+            flag = flag,
+            onEditCallback = {
+                callbackEditTask(model.id)
+            }
+        ) {
 
             override fun onSwipeToShowDelete() {
                 startAnimation {

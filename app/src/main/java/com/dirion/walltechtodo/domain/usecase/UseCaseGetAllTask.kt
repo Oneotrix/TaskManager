@@ -6,10 +6,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 @ScopeApplication
-class UseCaseLogin @Inject constructor(
-    private val tasksRepository: ITasksRepository
+class UseCaseGetAllTask @Inject constructor(
+    private val tasksRepository: ITasksRepository,
 ) {
-    suspend fun login(username: String, password: String) = withContext(Dispatchers.IO) {
-        return@withContext tasksRepository.login(username, password)
+
+     suspend fun fetch() = withContext(Dispatchers.IO) {
+         return@withContext tasksRepository.fetchTasks()
     }
+
 }

@@ -1,6 +1,7 @@
 package com.dirion.walltechtodo.view.features.tasks.recycler.gesture
 
 import android.content.Context
+import android.util.Log
 import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
 import android.view.View
@@ -18,5 +19,6 @@ open class OnSwipeTouchListener(
     override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
         return gestureDetector.onTouchEvent(p1!!)
     }
+
 
 }

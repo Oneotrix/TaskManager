@@ -2,7 +2,7 @@ package com.dirion.walltechtodo.view.features.tasks
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dirion.walltechtodo.domain.usecase.UseCaseGetTask
+import com.dirion.walltechtodo.domain.usecase.UseCaseGetAllTask
 import com.dirion.walltechtodo.view.features.tasks.TasksViewModel.State.UiState
 import com.dirion.walltechtodo.view.mapper.MapperUi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,7 +12,7 @@ import kotlinx.coroutines.*
 
 
 class TasksViewModel(
-    private val useCaseGetTask: UseCaseGetTask
+    private val useCaseGetAllTask: UseCaseGetAllTask
 ): ViewModel() {
 
     private val _data = MutableStateFlow(UiState())
@@ -24,7 +24,7 @@ class TasksViewModel(
 
     fun fetchData() = viewModelScope.launch {
 
-        useCaseGetTask.fetch().collect { list ->
+        useCaseGetAllTask.fetch().collect { list ->
             _data.value = UiState(tasks = list.map { model ->
                 MapperUi.mapTaskModelUi(model) })
         }

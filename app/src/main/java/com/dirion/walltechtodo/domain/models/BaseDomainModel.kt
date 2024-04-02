@@ -2,12 +2,12 @@ package com.dirion.walltechtodo.domain.models
 
 
 sealed class BaseDomainModel<T>(
-    val data: T? = null,
-    val message: String? = null
+    open val data: T? = null,
+    open val message: String? = null
 ){
 
-    class Success<T>(data: T) : BaseDomainModel<T>(data)
+    data class Success<T>(override val data: T) : BaseDomainModel<T>(data)
 
-    class Error<T>(message: String?, data: T? = null) : BaseDomainModel<T>(data, message)
+    data class Error<T>(override val message: String) : BaseDomainModel<T>(data = null, message)
 
 }
