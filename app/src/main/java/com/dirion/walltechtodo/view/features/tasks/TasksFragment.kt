@@ -1,6 +1,7 @@
 package com.dirion.walltechtodo.view.features.tasks
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.dirion.walltechtodo.App
-import com.dirion.walltechtodo.MainActivity
-import com.dirion.walltechtodo.R
 import com.dirion.walltechtodo.databinding.FragmentTasksBinding
 import com.dirion.walltechtodo.view.features.BaseFragment
 import com.dirion.walltechtodo.view.features.add_task.AddTaskFragment
@@ -35,7 +34,6 @@ class TasksFragment : BaseFragment<FragmentTasksBinding>(FragmentTasksBinding::i
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         App.presentationComponent
             .tasksFragmentComponentBuilder()
             .build()
@@ -61,7 +59,11 @@ class TasksFragment : BaseFragment<FragmentTasksBinding>(FragmentTasksBinding::i
         super.onViewCreated(view, savedInstanceState)
 
         binding.icAddTask.setOnClickListener {
-            val dialogFragment = AddTaskFragment.newInstance()
+            val dialogFragment = AddTaskFragment.newInstance(
+                onAddTask = {
+                    viewModel.fetchData()
+                }
+            )
 
             dialogFragment.show(parentFragmentManager, null)
         }

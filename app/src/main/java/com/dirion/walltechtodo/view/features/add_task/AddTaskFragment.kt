@@ -3,13 +3,10 @@ package com.dirion.walltechtodo.view.features.add_task
 import android.app.Dialog
 import android.graphics.Rect
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.*
-import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
@@ -38,16 +35,17 @@ class AddTaskFragment: BottomSheetDialogFragment(){
         }
     }
 
+    private var onAddTask: (() -> Unit)? = null
+
     @Inject
     lateinit var viewModelFactory: AddTaskViewModelFactory
 
     private val viewModel: AddTaskViewModel by viewModels { viewModelFactory }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         App.presentationComponent.addTaskDialogBottomSheetBuilder()
             .build()
             .inject(this)
-
-
 
         super.onCreate(savedInstanceState)
     }
@@ -74,6 +72,7 @@ class AddTaskFragment: BottomSheetDialogFragment(){
     private fun setAddTask() {
         binding.tvAddTask.setOnClickListener {
             viewModel.addTask(binding.etTaskName.text.toString()).invokeOnCompletion {
+                onAddTask!!.invoke()
                 this.dismiss()
             }
 
@@ -120,7 +119,11 @@ class AddTaskFragment: BottomSheetDialogFragment(){
             .launchIn(lifecycleScope)
     }
     companion object {
-        fun newInstance() = AddTaskFragment()
+        fun newInstance(
+            onAddTask: () -> Unit
+        ) = AddTaskFragment().apply {
+            this.onAddTask = onAddTask
+        }
     }
 
 }
