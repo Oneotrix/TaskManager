@@ -32,6 +32,7 @@ class EditTaskFragment: BottomSheetDialogFragment(){
     }
 
     private var taskId = 0L
+    private var reloadData: (() -> Unit)? = null
 
     @Inject
     lateinit var viewModelFactory: EditTaskViewModelFactory
@@ -46,7 +47,6 @@ class EditTaskFragment: BottomSheetDialogFragment(){
         super.onCreate(savedInstanceState)
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,11 +54,18 @@ class EditTaskFragment: BottomSheetDialogFragment(){
     ): View {
 
         inflateBinding(inflater, container)
+        init()
         attachRecycler()
-        setListeners()
         observeState()
+        setListeners()
+
 
         return binding.root
+    }
+
+    private fun init() {
+        viewModel.fetchTask(taskId)
+        binding.etTaskName.setText(viewModel.taskState.value.name)
     }
 
 
@@ -73,7 +80,6 @@ class EditTaskFragment: BottomSheetDialogFragment(){
     private fun attachRecycler() {
         binding.statusList.adapter = adapter
         setDecorator()
-        viewModel.fetchTask(taskId)
     }
 
     private fun setDecorator() {
@@ -105,6 +111,7 @@ class EditTaskFragment: BottomSheetDialogFragment(){
         viewModel.taskState
             .onEach {
                 binding.tvTaskName.text = it.name
+                binding.etTaskName.setText(it.name)
             }
             .launchIn(lifecycleScope)
     }
@@ -117,10 +124,16 @@ class EditTaskFragment: BottomSheetDialogFragment(){
     private fun setOnEditTextListener() {
         binding.etTaskName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+                if (p0 != null) {
+                    binding.etTaskName.setSelection(p0.length)
+                } else {
+                    binding.etTaskName.setSelection(p1)
+                }
+
                 viewModel.updateTaskName(p0.toString())
             }
 
@@ -132,8 +145,10 @@ class EditTaskFragment: BottomSheetDialogFragment(){
 
     private fun setOnEditConfirmListener() {
         binding.tvSaveTask.setOnClickListener {
-            viewModel.editTask()
-            this.dismiss()
+            viewModel.editTask().invokeOnCompletion {
+                reloadData!!.invoke()
+                this.dismiss()
+            }
         }
     }
 
@@ -143,9 +158,11 @@ class EditTaskFragment: BottomSheetDialogFragment(){
 
     companion object {
         fun newInstance(
-            taskId: Long
+            taskId: Long,
+            reloadData: () -> Unit
         ) = EditTaskFragment().apply {
             this.taskId = taskId
+            this.reloadData = reloadData
         }
     }
 

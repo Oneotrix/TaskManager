@@ -35,7 +35,7 @@ class AddTaskFragment: BottomSheetDialogFragment(){
         }
     }
 
-    private var onAddTask: (() -> Unit)? = null
+    private var reloadData: (() -> Unit)? = null
 
     @Inject
     lateinit var viewModelFactory: AddTaskViewModelFactory
@@ -72,7 +72,7 @@ class AddTaskFragment: BottomSheetDialogFragment(){
     private fun setAddTaskListener() {
         binding.tvAddTask.setOnClickListener {
             viewModel.addTask(binding.etTaskName.text.toString()).invokeOnCompletion {
-                onAddTask!!.invoke()
+                reloadData!!.invoke()
                 this.dismiss()
             }
 
@@ -120,9 +120,9 @@ class AddTaskFragment: BottomSheetDialogFragment(){
     }
     companion object {
         fun newInstance(
-            onAddTask: () -> Unit
+            reloadData: () -> Unit
         ) = AddTaskFragment().apply {
-            this.onAddTask = onAddTask
+            this.reloadData = reloadData
         }
     }
 

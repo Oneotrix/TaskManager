@@ -6,6 +6,7 @@ import com.dirion.walltechtodo.data.datasource.remote.NetworkDataSource
 import com.dirion.walltechtodo.data.mapper.MapperResponse
 import com.dirion.walltechtodo.data.models.network.rest.request.post.PostAddTaskModelRequest
 import com.dirion.walltechtodo.data.models.network.rest.request.post.PostLoginModelRequest
+import com.dirion.walltechtodo.data.models.network.rest.request.put.PutUpdateTaskModelRequest
 import com.dirion.walltechtodo.data.models.network.rest.response.BaseModelResponse.*
 import com.dirion.walltechtodo.di.scope.ScopeApplication
 import com.dirion.walltechtodo.domain.models.BaseDomainModel
@@ -26,7 +27,7 @@ class TasksRepository @Inject constructor(
 
         when(response) {
             is Success -> {
-                response.data?.forEach { model ->
+                response.data.forEach { model ->
                     val task = MapperResponse.mapToRoomTask(model)
                     localDataSource.insertTask(task)
                 }
@@ -49,7 +50,7 @@ class TasksRepository @Inject constructor(
 
         if (response is Success) {
                 val data = Task(
-                    id = response.data!!.id,
+                    id = response.data.id,
                     title = response.data.title,
                     status = response.data.status,
                 )
@@ -74,7 +75,18 @@ class TasksRepository @Inject constructor(
         }
     }
 
-    override suspend fun updateTask(username: String, password: String) {
+    override suspend fun updateTask(id: Long, title: String, status: String) {
+        val model = PutUpdateTaskModelRequest(id = id, title = title, status = status)
+        val response = networkDataSource.updateTask(model)
+
+        if (response is Success) {
+            val task = Task(
+                id = response.data.id,
+                title = response.data.title,
+                status = response.data.status
+            )
+            localDataSource.insertTask(task)
+        }
 
     }
 

@@ -63,7 +63,7 @@ class TasksFragment : BaseFragment<FragmentTasksBinding>(FragmentTasksBinding::i
 
         binding.icAddTask.setOnClickListener {
             val dialogFragment = AddTaskFragment.newInstance(
-                onAddTask = {
+                reloadData = {
                     viewModel.fetchData()
                 }
             )
@@ -75,7 +75,10 @@ class TasksFragment : BaseFragment<FragmentTasksBinding>(FragmentTasksBinding::i
     }
 
     private fun showEditTaskFragment(taskId: Long) {
-        val dialogFragment = EditTaskFragment.newInstance(taskId = taskId)
+        val dialogFragment = EditTaskFragment.newInstance(
+            taskId = taskId,
+            reloadData = {viewModel.fetchData()}
+        )
 
         dialogFragment.show(parentFragmentManager, null)
     }

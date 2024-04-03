@@ -2,13 +2,13 @@ package com.dirion.walltechtodo.data.models.network.rest.response
 
 
 sealed class BaseModelResponse<T>(
-    val  data: T? = null,
-    val message: String? = null
+    open val  data: T? = null,
+    open val message: String? = null
 ) {
 
-    class Success<T>(data: T) : BaseModelResponse<T>(data)
+    data class Success<T>(override val data: T) : BaseModelResponse<T>(data)
 
-    class Error<T>(message: String?, data: T? = null) : BaseModelResponse<T>(data, message)
+    data class Error<T>(override val message: String, override val data: T? = null) : BaseModelResponse<T>(data, message)
 
 
 }

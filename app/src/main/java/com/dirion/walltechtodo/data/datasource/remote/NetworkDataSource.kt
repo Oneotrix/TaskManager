@@ -29,7 +29,7 @@ class NetworkDataSource @Inject constructor(
             val data = apiService.getTasks("$username:$password")
             Success(data)
         } catch (e : HttpException) {
-            Error(e.message)
+            Error(e.message())
         }
 
     }
@@ -39,13 +39,13 @@ class NetworkDataSource @Inject constructor(
     }
 
     override suspend fun login(data: PostLoginModelRequest): BaseModelResponse<PostLoginModelResponse> {
-       try {
+       return try {
            val requestModel = apiService.login(data)
            username = data.username
            password = data.password
            return Success(requestModel)
        } catch (e: Exception) {
-           return Error(e.message)
+           Error(e.message.orEmpty())
        }
 
     }
@@ -60,12 +60,20 @@ class NetworkDataSource @Inject constructor(
             )
             Success(response)
         } catch (e: Exception) {
-            Error(e.message)
+            Error(e.message.orEmpty())
         }
     }
 
     override suspend fun updateTask(data: PutUpdateTaskModelRequest): BaseModelResponse<PutUpdateTaskModelResponse> {
-        TODO("Not yet implemented")
+        return try {
+            val response = apiService.updateTask(
+                authorization = "$username:$password",
+                data = data,
+            )
+            Success(response)
+        } catch (e: Exception) {
+            Error(e.message.orEmpty())
+        }
     }
 
     override suspend fun deleteTask(data: DeleteTaskModelRequest): BaseModelResponse<DeleteTaskModelResponse> {

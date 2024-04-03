@@ -39,7 +39,7 @@ interface ApiService {
     suspend fun updateTask(
         @Header("Authorization") authorization: String,
         @Body data: PutUpdateTaskModelRequest
-    ): BaseModelResponse<PutUpdateTaskModelResponse>
+    ): PutUpdateTaskModelResponse
     @DELETE("tasks/remove")
     suspend fun deleteTask(
         @Header("Authorization") authorization: String,

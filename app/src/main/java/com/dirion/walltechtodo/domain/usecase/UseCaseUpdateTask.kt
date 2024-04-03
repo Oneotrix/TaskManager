@@ -8,7 +8,7 @@ import javax.inject.Inject
 class UseCaseUpdateTask @Inject constructor(
     private val tasksRepository: ITasksRepository
 ) {
-    suspend fun updateTask(name: String, status: String) = withContext(Dispatchers.IO) {
-        tasksRepository.updateTask(name, status)
+    suspend fun updateTask(id: Long, name: String, status: String) = withContext(Dispatchers.IO) {
+        tasksRepository.updateTask(id, name, status)
     }
 }
