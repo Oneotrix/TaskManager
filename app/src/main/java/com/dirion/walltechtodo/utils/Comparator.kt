@@ -2,6 +2,7 @@ package com.dirion.walltechtodo.utils
 
 import androidx.recyclerview.widget.DiffUtil
 import com.dirion.walltechtodo.view.features.add_task.recycler.StatusVhModel
+import com.dirion.walltechtodo.view.features.notification.NotificationModel
 import com.dirion.walltechtodo.view.features.tasks.TaskModel
 
 object Comparator {
@@ -16,7 +17,6 @@ object Comparator {
             oldItem.title == newItem.title &&
             oldItem.id == newItem.id
     }
-
 
     val addTaskDiffUtil = object: DiffUtil.ItemCallback<StatusVhModel>() {
         override fun areItemsTheSame(oldItem: StatusVhModel, newItem: StatusVhModel): Boolean {
@@ -63,6 +63,23 @@ object Comparator {
 
     }
 
+    val notificationDiffUtil = object: DiffUtil.ItemCallback<NotificationModel.SwitcherModel>() {
+        override fun areItemsTheSame(
+            oldItem: NotificationModel.SwitcherModel,
+            newItem: NotificationModel.SwitcherModel
+        ): Boolean {
+            return oldItem.type == newItem.type
+        }
+
+        override fun areContentsTheSame(
+            oldItem: NotificationModel.SwitcherModel,
+            newItem: NotificationModel.SwitcherModel
+        ): Boolean {
+            return oldItem.isChecked == newItem.isChecked
+        }
+
+
+    }
 
     sealed interface AddTaskPayload {
         data class Switcher(val isChecked: Boolean) : AddTaskPayload

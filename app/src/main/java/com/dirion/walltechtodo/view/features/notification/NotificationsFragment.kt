@@ -1,27 +1,46 @@
 package com.dirion.walltechtodo.view.features.notification
 
+
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.dirion.walltechtodo.App
 import com.dirion.walltechtodo.databinding.FragmentNotificationsBinding
+import com.dirion.walltechtodo.utils.TestData
+import com.dirion.walltechtodo.view.features.BaseFragment
+import com.dirion.walltechtodo.view.features.notification.recycler.AdapterNotification
+import javax.inject.Inject
 
-class NotificationsFragment: Fragment(){
-
-    private lateinit var binding: FragmentNotificationsBinding
+class NotificationsFragment: BaseFragment<FragmentNotificationsBinding>(FragmentNotificationsBinding::inflate){
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false)
-
-        return binding.root
+    private val adapter by lazy {
+        AdapterNotification()
     }
+
+    @Inject
+    lateinit var viewModelFactory: NotificationViewModelFactory
+
+    private val viewModel: NotificationViewModel by viewModels { viewModelFactory }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        App.presentationComponent.notificationFragmentComponentBuilder()
+            .build()
+            .inject(this@NotificationsFragment)
+
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.test()
+        binding.rvNotifications.adapter = adapter
+        adapter.submitList(TestData.notificationModel.notifications)
+
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+
+
 
 
     companion object {

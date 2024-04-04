@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.dirion.walltechtodo.App
+import com.dirion.walltechtodo.MainActivity
 import com.dirion.walltechtodo.databinding.FragmentTasksBinding
 import com.dirion.walltechtodo.view.features.BaseFragment
 import com.dirion.walltechtodo.view.features.add_task.AddTaskFragment
@@ -42,6 +43,7 @@ class TasksFragment : BaseFragment<FragmentTasksBinding>(FragmentTasksBinding::i
             .build()
             .inject(this)
 
+
         super.onCreate(savedInstanceState)
 
     }
@@ -51,6 +53,8 @@ class TasksFragment : BaseFragment<FragmentTasksBinding>(FragmentTasksBinding::i
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        (requireActivity() as MainActivity).showTabLayout()
 
         observeData()
 

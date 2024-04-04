@@ -5,11 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.dirion.walltechtodo.MainActivity
 import com.dirion.walltechtodo.databinding.FragmentSettingsBinding
+import com.dirion.walltechtodo.view.features.BaseFragment
 
-class SettingsFragment: Fragment(){
+class SettingsFragment: BaseFragment<FragmentSettingsBinding>(FragmentSettingsBinding::inflate){
 
-    private lateinit var binding: FragmentSettingsBinding
 
 
     override fun onCreateView(
@@ -18,9 +19,8 @@ class SettingsFragment: Fragment(){
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
-        return binding.root
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
 

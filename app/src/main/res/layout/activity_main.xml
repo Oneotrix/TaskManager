@@ -23,6 +23,7 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/vgTabLayout"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,14 +36,14 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/format_list_bulleted"
+            android:icon="@drawable/ic_format_list_bulleted"
             android:text="Tasks"
             />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/settings"
+            android:icon="@drawable/ic_settings"
             android:text="Settings"
             />
 

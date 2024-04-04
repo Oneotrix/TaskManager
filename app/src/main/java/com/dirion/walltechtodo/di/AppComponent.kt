@@ -7,6 +7,7 @@ import com.dirion.walltechtodo.di.data.modules.OkHttpModule
 import com.dirion.walltechtodo.di.data.modules.RoomModule
 import com.dirion.walltechtodo.di.data.modules.SharedPreferencesModule
 import com.dirion.walltechtodo.di.domain.DomainComponent
+import com.dirion.walltechtodo.di.domain.module.SettingsRepositoryModule
 import com.dirion.walltechtodo.di.domain.module.TasksRepositoryModule
 import com.dirion.walltechtodo.di.presentation.PresentationComponent
 import com.dirion.walltechtodo.di.scope.ScopeApplication
@@ -22,7 +23,8 @@ import javax.inject.Singleton
         OkHttpModule::class,
         ModuleRetrofit::class,
         RoomModule::class,
-        SharedPreferencesModule::class
+        SharedPreferencesModule::class,
+        SettingsRepositoryModule::class,
     ],
 )
 interface AppComponent {

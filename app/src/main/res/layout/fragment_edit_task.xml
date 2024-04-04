@@ -73,7 +73,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/carousel_item"
+            tools:listitem="@layout/item_carousel"
             >
 
         </androidx.recyclerview.widget.RecyclerView>

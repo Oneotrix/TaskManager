@@ -28,7 +28,7 @@
             android:id="@+id/icAddTask"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/add"
+            android:src="@drawable/ic_add"
             android:layout_gravity="center|end"
             android:layout_marginEnd="30dp"
             />

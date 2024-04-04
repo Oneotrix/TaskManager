@@ -5,7 +5,9 @@ import android.os.Bundle
 import com.dirion.walltechtodo.databinding.ActivityMainBinding
 import com.dirion.walltechtodo.di.presentation.subcomponents.ActivityComponent
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.GONE
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.google.android.material.tabs.TabLayout.VISIBLE
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,6 +48,15 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+
+    fun hideTabLayout() {
+        binding.vgTabLayout.visibility = GONE
+    }
+
+    fun showTabLayout() {
+        binding.vgTabLayout.visibility = VISIBLE
     }
 
     companion object {
