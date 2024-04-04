@@ -1,6 +1,7 @@
 package com.dirion.walltechtodo.data.datasource.remote
 
 import com.dirion.walltechtodo.data.ApiService
+import com.dirion.walltechtodo.data.datasource.local.shared_prefs.SharedPrefsHelper
 import com.dirion.walltechtodo.data.models.network.rest.request.delete.DeleteTaskModelRequest
 import com.dirion.walltechtodo.data.models.network.rest.request.get.GetTasksModelRequest
 import com.dirion.walltechtodo.data.models.network.rest.request.post.PostAddTaskModelRequest
@@ -18,11 +19,19 @@ import javax.inject.Inject
 
 /*TODO Создаются разные объекты каждый раз, проблема скопа*/
 class NetworkDataSource @Inject constructor(
-    private val apiService: ApiService
+    private val apiService: ApiService,
+    private val sharedPrefsHelper: SharedPrefsHelper
 ) : INetworkDataSource {
 
-    private var username = "Testman1"
-    private var password = "123123"
+    private val username by lazy {
+        sharedPrefsHelper.reader.getString("username", null)
+    }
+
+    private val password by lazy {
+        sharedPrefsHelper.reader.getString("password", null)
+    }
+
+
     override suspend fun getTasksList()
     : BaseModelResponse<List<GetTaskModelResponse>> {
         return try {
@@ -41,8 +50,6 @@ class NetworkDataSource @Inject constructor(
     override suspend fun login(data: PostLoginModelRequest): BaseModelResponse<PostLoginModelResponse> {
        return try {
            val requestModel = apiService.login(data)
-           username = data.username
-           password = data.password
            return Success(requestModel)
        } catch (e: Exception) {
            Error(e.message.orEmpty())

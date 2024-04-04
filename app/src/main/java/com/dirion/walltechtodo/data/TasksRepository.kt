@@ -22,6 +22,8 @@ class TasksRepository @Inject constructor(
     val localDataSource:  LocalDataSource,
 ): ITasksRepository {
 
+
+
     override suspend fun fetchTasks(): Flow<List<TaskModelDomain>> {
         val response = networkDataSource.getTasksList()
 
@@ -64,13 +66,14 @@ class TasksRepository @Inject constructor(
         val requestModel = PostLoginModelRequest(username = username, password = password)
         val response = networkDataSource.login(data = requestModel)
 
-        return when(response) {
+        when(response) {
             is Success -> {
-                BaseDomainModel.Success(response.message.orEmpty())
+                localDataSource.saveUserInfo(username, password)
+                return BaseDomainModel.Success(response.message.orEmpty())
             }
 
             else -> {
-                BaseDomainModel.Error(response.message.orEmpty())
+                return BaseDomainModel.Error(response.message.orEmpty())
             }
         }
     }

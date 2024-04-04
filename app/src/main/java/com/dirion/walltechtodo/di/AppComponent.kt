@@ -5,6 +5,7 @@ import com.dirion.walltechtodo.di.data.DataComponent
 import com.dirion.walltechtodo.di.data.modules.ModuleRetrofit
 import com.dirion.walltechtodo.di.data.modules.OkHttpModule
 import com.dirion.walltechtodo.di.data.modules.RoomModule
+import com.dirion.walltechtodo.di.data.modules.SharedPreferencesModule
 import com.dirion.walltechtodo.di.domain.DomainComponent
 import com.dirion.walltechtodo.di.domain.module.TasksRepositoryModule
 import com.dirion.walltechtodo.di.presentation.PresentationComponent
@@ -20,7 +21,8 @@ import javax.inject.Singleton
         TasksRepositoryModule::class,
         OkHttpModule::class,
         ModuleRetrofit::class,
-        RoomModule::class
+        RoomModule::class,
+        SharedPreferencesModule::class
     ],
 )
 interface AppComponent {
