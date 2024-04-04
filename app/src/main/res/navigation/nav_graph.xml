@@ -94,6 +94,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_volumeFragment"
             app:destination="@id/volumeFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_tasksFragment"
+            app:destination="@id/tasksFragment" />
     </fragment>
     <fragment
         android:id="@+id/tasksFragment"
