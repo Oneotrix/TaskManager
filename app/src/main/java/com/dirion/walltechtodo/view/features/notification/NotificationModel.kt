@@ -15,11 +15,20 @@ data class NotificationModel(
             GO;
 
             companion object {
-                fun typeTitle(type: SwitcherType) : String {
+                fun titleByType(type: SwitcherType) : String {
                     return when(type) {
                         READY -> "Ready"
                         STEADY -> "Steady"
                         GO -> "GO!"
+                    }
+                }
+
+                fun typeByTitle(title: String) : SwitcherType {
+                    return when(title) {
+                        "Ready" -> READY
+                        "Steady" -> STEADY
+                        "GO!" -> GO
+                        else -> error("Unexpected title")
                     }
                 }
 

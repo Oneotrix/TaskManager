@@ -20,6 +20,11 @@ class SettingsRepository @Inject constructor(
 
     override fun getUsersNotifications(): Map<String, Boolean> {
         val notification = sharedPrefsHelper.reader.getString("notifications", null).orEmpty()
-        return json.decodeFromString<Map<String, Boolean>>(notification)
+
+        return try {
+            json.decodeFromString<Map<String, Boolean>>(notification)
+        } catch (e: Exception) {
+            mapOf()
+        }
     }
 }

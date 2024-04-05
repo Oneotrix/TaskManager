@@ -7,7 +7,9 @@ import com.dirion.walltechtodo.databinding.ItemNotificationListBinding
 import com.dirion.walltechtodo.utils.Comparator
 import com.dirion.walltechtodo.view.features.notification.NotificationModel
 
-class AdapterNotification():
+class AdapterNotification(
+    private val callbackUpdateModel: (NotificationModel.SwitcherModel) -> Unit
+):
     ListAdapter<NotificationModel.SwitcherModel, NotificationViewHolder>(Comparator.notificationDiffUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
         return NotificationViewHolder(
@@ -15,7 +17,8 @@ class AdapterNotification():
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ),
+            callbackUpdateModel
         )
     }
 

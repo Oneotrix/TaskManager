@@ -6,21 +6,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.dirion.walltechtodo.MainActivity
+import com.dirion.walltechtodo.R
 import com.dirion.walltechtodo.databinding.FragmentSettingsBinding
 import com.dirion.walltechtodo.view.features.BaseFragment
 
 class SettingsFragment: BaseFragment<FragmentSettingsBinding>(FragmentSettingsBinding::inflate){
 
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        initListeners()
+    }
 
+    private fun initListeners() {
+        onNotificationFragment()
+    }
 
-        return super.onCreateView(inflater, container, savedInstanceState)
+    private fun onNotificationFragment() {
+        binding.tvNotifications.setOnClickListener {
+            MainActivity.activityComponent.navigationController().navigate(R.id.action_settingsFragment_to_notificationsFragment)
+        }
     }
 
 

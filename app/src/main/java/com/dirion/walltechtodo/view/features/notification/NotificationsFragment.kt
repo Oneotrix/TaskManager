@@ -5,17 +5,22 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.dirion.walltechtodo.App
+import com.dirion.walltechtodo.MainActivity
+import com.dirion.walltechtodo.R
 import com.dirion.walltechtodo.databinding.FragmentNotificationsBinding
 import com.dirion.walltechtodo.utils.TestData
 import com.dirion.walltechtodo.view.features.BaseFragment
 import com.dirion.walltechtodo.view.features.notification.recycler.AdapterNotification
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 class NotificationsFragment: BaseFragment<FragmentNotificationsBinding>(FragmentNotificationsBinding::inflate){
 
 
     private val adapter by lazy {
-        AdapterNotification()
+        AdapterNotification { model ->
+            viewModel.updateSwitcherModel(model)
+        }
     }
 
     @Inject
@@ -32,14 +37,25 @@ class NotificationsFragment: BaseFragment<FragmentNotificationsBinding>(Fragment
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.test()
-        binding.rvNotifications.adapter = adapter
-        adapter.submitList(TestData.notificationModel.notifications)
+
+
+        setOnBackListener()
+        setRecycler()
 
         super.onViewCreated(view, savedInstanceState)
     }
 
+    private fun setRecycler() {
+        binding.rvNotifications.adapter = adapter
+        adapter.submitList(viewModel.data.value.model.notifications)
+    }
 
+    private fun setOnBackListener() {
+        binding.btnBack.setOnClickListener {
+            viewModel.saveData()
+            MainActivity.activityComponent.navigationController().navigate(R.id.action_notificationsFragment_to_settingsFragment)
+        }
+    }
 
 
 
