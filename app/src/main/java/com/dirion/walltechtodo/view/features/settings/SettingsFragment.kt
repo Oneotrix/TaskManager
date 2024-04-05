@@ -21,6 +21,7 @@ class SettingsFragment: BaseFragment<FragmentSettingsBinding>(FragmentSettingsBi
 
     private fun initListeners() {
         onNotificationFragment()
+        onDateTimeFragment()
     }
 
     private fun onNotificationFragment() {
@@ -29,6 +30,11 @@ class SettingsFragment: BaseFragment<FragmentSettingsBinding>(FragmentSettingsBi
         }
     }
 
+    private fun onDateTimeFragment() {
+        binding.tvDate.setOnClickListener {
+            MainActivity.activityComponent.navigationController().navigate(R.id.action_settingsFragment_to_dataTimeFragment)
+        }
+    }
 
     companion object {
         fun newInstance() = SettingsFragment()

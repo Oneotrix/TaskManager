@@ -1,6 +1,5 @@
 package com.dirion.walltechtodo.data
 
-import android.util.Log
 import com.dirion.walltechtodo.data.datasource.local.shared_prefs.SharedPrefsHelper
 import com.dirion.walltechtodo.domain.repository.ISettingsRepository
 import kotlinx.serialization.json.Json
@@ -26,5 +25,16 @@ class SettingsRepository @Inject constructor(
         } catch (e: Exception) {
             mapOf()
         }
+    }
+
+    override fun saveDateTimestamp(timestamp: Long) {
+        sharedPrefsHelper.writer
+            .putLong("date", timestamp)
+            .commit()
+    }
+
+    override fun getDateTimestamp(): Long {
+        return sharedPrefsHelper.reader
+            .getLong("date", 0)
     }
 }
