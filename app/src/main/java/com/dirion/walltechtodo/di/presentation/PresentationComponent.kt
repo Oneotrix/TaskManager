@@ -9,6 +9,7 @@ import com.dirion.walltechtodo.di.presentation.subcomponents.NameFragmentCompone
 import com.dirion.walltechtodo.di.presentation.subcomponents.NotesFragmentComponent
 import com.dirion.walltechtodo.di.presentation.subcomponents.NotificationFragmentComponent
 import com.dirion.walltechtodo.di.presentation.subcomponents.TasksFragmentComponent
+import com.dirion.walltechtodo.di.presentation.subcomponents.VolumeFragmentComponent
 import com.dirion.walltechtodo.di.scope.ScopePresentation
 import dagger.Subcomponent
 
@@ -33,6 +34,8 @@ interface PresentationComponent {
     fun notesFragmentComponentBuilder() : NotesFragmentComponent.Builder
 
     fun nameFragmentComponentBuilder() : NameFragmentComponent.Builder
+
+    fun volumeFragmentComponentBuilder() : VolumeFragmentComponent.Builder
 
     @Subcomponent.Builder
     interface Builder {

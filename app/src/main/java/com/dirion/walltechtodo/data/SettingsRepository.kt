@@ -83,4 +83,15 @@ class SettingsRepository @Inject constructor(
             return null
         }
     }
+
+    override fun saveVolumeValue(value: Float) {
+        sharedPrefsHelper.writer
+            .putFloat("volume", value)
+            .commit()
+    }
+
+    override fun getVolumeValue(): Float {
+        return sharedPrefsHelper.reader
+            .getFloat("volume", 0f)
+    }
 }

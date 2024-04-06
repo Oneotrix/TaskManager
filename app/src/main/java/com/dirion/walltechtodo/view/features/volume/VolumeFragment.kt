@@ -1,28 +1,63 @@
 package com.dirion.walltechtodo.view.features.volume
 
+
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.dirion.walltechtodo.App
+import com.dirion.walltechtodo.MainActivity
+import com.dirion.walltechtodo.R
 import com.dirion.walltechtodo.databinding.FragmentVolumeBinding
+import com.dirion.walltechtodo.view.features.BaseFragment
+import javax.inject.Inject
 
-class VolumeFragment: Fragment(){
+class VolumeFragment: BaseFragment<FragmentVolumeBinding>(FragmentVolumeBinding::inflate){
 
-    private lateinit var binding: FragmentVolumeBinding
+    @Inject
+    lateinit var viewModelFactory: VolumeViewModelFactory
+
+    private val viewModel: VolumeViewModel by viewModels { viewModelFactory }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        App.presentationComponent.volumeFragmentComponentBuilder()
+            .build()
+            .inject(this@VolumeFragment)
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        binding = FragmentVolumeBinding.inflate(inflater, container, false)
-
-        return binding.root
+        super.onCreate(savedInstanceState)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initSliderValue()
+        setListeners()
+
+    }
+
+    private fun setListeners() {
+        setSliderListener()
+        setOnBackListener()
+    }
+
+    private fun setSliderListener() {
+        binding.slider.addOnChangeListener { _, fl, _ ->
+            viewModel.updateValue(fl)
+        }
+    }
+
+    private fun setOnBackListener() {
+        binding.btnBack.setOnClickListener {
+            viewModel.saveValue()
+            MainActivity.activityComponent.navigationController().navigate(R.id.action_volumeFragment_to_settingsFragment)
+        }
+    }
+
+    private fun initSliderValue() {
+        binding.slider.value = viewModel.data.value
+    }
 
     companion object {
         fun newInstance() = VolumeFragment()
