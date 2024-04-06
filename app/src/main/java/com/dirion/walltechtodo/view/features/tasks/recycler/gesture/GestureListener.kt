@@ -59,9 +59,7 @@ abstract class GestureListener(
 
         abstract fun onSwipeToDismiss()
 
-
-    override fun onSingleTapUp(e: MotionEvent): Boolean {
-        onEditCallback.invoke()
-        return super.onSingleTapUp(e)
-    }
+        override fun onLongPress(e: MotionEvent) {
+            onEditCallback.invoke()
+        }
 }

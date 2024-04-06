@@ -1,5 +1,6 @@
 package com.dirion.walltechtodo.view.features.edit_task
 
+import android.app.Dialog
 import android.graphics.Rect
 import android.os.Bundle
 import android.text.Editable
@@ -16,6 +17,8 @@ import com.dirion.walltechtodo.view.features.edit_task.recycler.AdapterEditTask
 import com.dirion.walltechtodo.view.features.edit_task.recycler.StatusVhModel
 import com.dirion.walltechtodo.view.global.SizeExtensions.dp
 import com.dirion.walltechtodo.view.global.StatusTask
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -45,6 +48,12 @@ class EditTaskFragment: BottomSheetDialogFragment(){
             .inject(this@EditTaskFragment)
 
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return BottomSheetDialog(requireContext()).apply {
+            behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
     }
 
     override fun onCreateView(

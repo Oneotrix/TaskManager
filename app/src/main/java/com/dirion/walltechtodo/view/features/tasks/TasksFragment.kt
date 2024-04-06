@@ -28,8 +28,8 @@ class TasksFragment : BaseFragment<FragmentTasksBinding>(FragmentTasksBinding::i
 
     private val adapter by lazy {
         AdapterTasks(
-            callbackDeleteTask = { data ->
-                viewModel.changeTasksList(data)
+            callbackDeleteTask = { id ->
+                viewModel.deleteTask(id)
             },
             callbackEditTask = { id ->
                 showEditTaskFragment(id)
@@ -76,6 +76,11 @@ class TasksFragment : BaseFragment<FragmentTasksBinding>(FragmentTasksBinding::i
         }
 
         initRecycler()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        (requireActivity() as MainActivity).showTabLayout()
     }
 
     private fun showEditTaskFragment(taskId: Long) {

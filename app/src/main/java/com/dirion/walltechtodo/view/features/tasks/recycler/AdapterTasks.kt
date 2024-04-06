@@ -10,8 +10,8 @@ import com.dirion.walltechtodo.view.features.tasks.recycler.gesture.ItemDeleteLi
 
 
 class AdapterTasks(
-    private val callbackDeleteTask: (List<TaskModel>) -> Unit,
-    private val callbackEditTask: (Long) -> Unit
+    private val callbackDeleteTask: (Long) -> Unit,
+    private val callbackEditTask: (Long) -> Unit,
 ): ListAdapter<TaskModel, TasksVH>
     (Comparator.tasksListDiffUtil) {
 
@@ -27,21 +27,7 @@ class AdapterTasks(
     }
 
     override fun onBindViewHolder(holder: TasksVH, position: Int) {
-
-        val listener = object : ItemDeleteListener {
-            override fun delete(position: Int) {
-                val newList = mutableListOf<TaskModel>()
-                newList.addAll(this@AdapterTasks.currentList)
-                newList.removeAt(position)
-
-                this@AdapterTasks.submitList(newList)
-                this@AdapterTasks.notifyDataSetChanged()
-
-                callbackDeleteTask.invoke(newList)
-            }
-        }
-
-        holder.bind(getItem(position), listener)
+        holder.bind(getItem(position), callbackDeleteTask)
     }
 
 

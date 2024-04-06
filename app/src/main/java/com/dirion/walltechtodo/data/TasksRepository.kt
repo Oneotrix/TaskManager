@@ -4,6 +4,7 @@ import com.dirion.walltechtodo.data.datasource.local.LocalDataSource
 import com.dirion.walltechtodo.data.datasource.local.room.Task
 import com.dirion.walltechtodo.data.datasource.remote.NetworkDataSource
 import com.dirion.walltechtodo.data.mapper.MapperResponse
+import com.dirion.walltechtodo.data.models.network.rest.request.delete.DeleteTaskModelRequest
 import com.dirion.walltechtodo.data.models.network.rest.request.post.PostAddTaskModelRequest
 import com.dirion.walltechtodo.data.models.network.rest.request.post.PostLoginModelRequest
 import com.dirion.walltechtodo.data.models.network.rest.request.put.PutUpdateTaskModelRequest
@@ -99,6 +100,15 @@ class TasksRepository @Inject constructor(
             BaseDomainModel.Success(MapperResponse.mapToDomain(task))
         } catch (e: Exception) {
             return BaseDomainModel.Error(e.message ?: "error")
+        }
+    }
+
+    override suspend fun deleteTask(id: Long) {
+        val model = DeleteTaskModelRequest(id = id)
+        val response = networkDataSource.deleteTask(model)
+
+        if (response is Success) {
+            localDataSource.deleteTask(id)
         }
     }
 

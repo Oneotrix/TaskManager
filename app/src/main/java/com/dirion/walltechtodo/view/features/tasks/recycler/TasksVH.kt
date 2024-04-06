@@ -29,7 +29,7 @@ class TasksVH(
     private var deleteButton: TextView? = null
     private var deleteButtonWidth = 0f
     private var deleteButtonHeight = 0f
-    private lateinit var callbackDelete: ItemDeleteListener
+    private lateinit var callbackDelete: () -> Unit
     private lateinit var model: TaskModel
     private var flag: Boolean = false
 
@@ -41,14 +41,16 @@ class TasksVH(
 
 
 
-    fun bind(model: TaskModel, callbackDeleteItem: ItemDeleteListener) = with(binding){
+    fun bind(model: TaskModel, callbackDeleteItem: (Long) -> Unit) = with(binding){
 
         this@TasksVH.model = model
         if(deleteButton == null) attachDeleteButton()
         tvTaskStatus.text = model.status.statusTitle
         tvTaskTitle.text = model.title
         tvTaskId.text = "#${model.id}"
-        callbackDelete = callbackDeleteItem
+        callbackDelete = {
+            callbackDeleteItem(model.id)
+        }
 
         setupTranslationsX()
 
@@ -161,7 +163,7 @@ class TasksVH(
 
                 override fun onAnimationEnd(p0: Animator) {
                     if (direction == Directions.TO_DISMISS) {
-                        callbackDelete.delete(layoutPosition)
+                        callbackDelete.invoke()
                         binding.root.removeView(deleteButton)
                     }
                 }

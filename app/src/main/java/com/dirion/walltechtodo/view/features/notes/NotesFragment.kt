@@ -39,7 +39,6 @@ class NotesFragment: BaseFragment<FragmentNotesBinding>(FragmentNotesBinding::in
 
     private fun setOnBackListener() {
         binding.btnBack.setOnClickListener {
-            viewModel.saveNotes()
             MainActivity.activityComponent.navigationController().navigate(R.id.action_notesFragment_to_settingsFragment)
         }
     }

@@ -52,7 +52,6 @@ class NotificationsFragment: BaseFragment<FragmentNotificationsBinding>(Fragment
 
     private fun setOnBackListener() {
         binding.btnBack.setOnClickListener {
-            viewModel.saveData()
             MainActivity.activityComponent.navigationController().navigate(R.id.action_notificationsFragment_to_settingsFragment)
         }
     }

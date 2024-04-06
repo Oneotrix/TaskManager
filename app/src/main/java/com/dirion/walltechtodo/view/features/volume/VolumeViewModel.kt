@@ -18,9 +18,10 @@ class VolumeViewModel(
 
     fun updateValue(value: Float) {
         _data.value = value
+        saveValue()
     }
 
-    fun saveValue() {
+    private fun saveValue() {
         useCaseWorkWithVolume.save(_data.value)
     }
 

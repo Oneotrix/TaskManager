@@ -6,6 +6,7 @@ import com.dirion.walltechtodo.MainActivity
 import com.dirion.walltechtodo.R
 import com.dirion.walltechtodo.databinding.FragmentSettingsBinding
 import com.dirion.walltechtodo.view.features.BaseFragment
+import com.dirion.walltechtodo.view.features.login.LoginFragment
 
 class SettingsFragment: BaseFragment<FragmentSettingsBinding>(FragmentSettingsBinding::inflate){
 
@@ -16,12 +17,18 @@ class SettingsFragment: BaseFragment<FragmentSettingsBinding>(FragmentSettingsBi
         initListeners()
     }
 
+    override fun onStart() {
+        super.onStart()
+        (requireActivity() as MainActivity).showTabLayout()
+    }
+
     private fun initListeners() {
         onNotificationFragment()
         onDateTimeFragment()
         onNotesFragment()
         onNameFragment()
         onVolumeFragment()
+        onLoginFragment()
     }
 
     private fun onNotificationFragment() {
@@ -51,6 +58,12 @@ class SettingsFragment: BaseFragment<FragmentSettingsBinding>(FragmentSettingsBi
     private fun onVolumeFragment() {
         binding.tvVolume.setOnClickListener {
             MainActivity.activityComponent.navigationController().navigate(R.id.action_settingsFragment_to_volumeFragment)
+        }
+    }
+
+    private fun onLoginFragment() {
+        binding.tvLogOut.setOnClickListener {
+            MainActivity.activityComponent.navigationController().navigate(R.id.action_settingsFragment_to_loginFragment)
         }
     }
 

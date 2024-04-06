@@ -2,6 +2,7 @@ package com.dirion.walltechtodo.view.features.tasks
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dirion.walltechtodo.domain.usecase.UseCaseDeleteTask
 import com.dirion.walltechtodo.domain.usecase.UseCaseGetAllTask
 import com.dirion.walltechtodo.view.features.tasks.TasksViewModel.State.UiState
 import com.dirion.walltechtodo.view.mapper.MapperUi
@@ -12,7 +13,8 @@ import kotlinx.coroutines.*
 
 
 class TasksViewModel(
-    private val useCaseGetAllTask: UseCaseGetAllTask
+    private val useCaseGetAllTask: UseCaseGetAllTask,
+    private val useCaseDeleteTask: UseCaseDeleteTask
 ): ViewModel() {
 
     private val _data = MutableStateFlow(UiState())
@@ -30,10 +32,20 @@ class TasksViewModel(
         }
     }
 
+    fun deleteTask(id: Long) = viewModelScope.launch {
+        changeTaskList(id)
 
+        useCaseDeleteTask.delete(id)
+    }
 
-    fun changeTasksList(tasks: List<TaskModel>) = viewModelScope.launch{
-        _data.emit(UiState(tasks))
+    private suspend fun changeTaskList(id: Long) {
+        val newList: MutableList<TaskModel> = mutableListOf()
+
+        _data.value.tasks.forEach { model ->
+            if (model.id != id) newList.add(model)
+        }
+
+        _data.emit(UiState(tasks = newList))
     }
 
 

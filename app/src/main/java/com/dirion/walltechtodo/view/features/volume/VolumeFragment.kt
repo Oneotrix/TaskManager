@@ -2,7 +2,6 @@ package com.dirion.walltechtodo.view.features.volume
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.dirion.walltechtodo.App
@@ -50,7 +49,6 @@ class VolumeFragment: BaseFragment<FragmentVolumeBinding>(FragmentVolumeBinding:
 
     private fun setOnBackListener() {
         binding.btnBack.setOnClickListener {
-            viewModel.saveValue()
             MainActivity.activityComponent.navigationController().navigate(R.id.action_volumeFragment_to_settingsFragment)
         }
     }

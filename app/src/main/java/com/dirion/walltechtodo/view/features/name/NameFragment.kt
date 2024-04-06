@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.dirion.walltechtodo.App
 import com.dirion.walltechtodo.MainActivity
 import com.dirion.walltechtodo.R
 import com.dirion.walltechtodo.databinding.FragmentNameBinding
 import com.dirion.walltechtodo.view.features.BaseFragment
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 class NameFragment: BaseFragment<FragmentNameBinding>(FragmentNameBinding::inflate){
@@ -35,6 +38,15 @@ class NameFragment: BaseFragment<FragmentNameBinding>(FragmentNameBinding::infla
         initFields()
         setListeners()
         setOnBackListener()
+        observeData()
+    }
+
+    private fun observeData() {
+        viewModel.data
+            .onEach {
+                viewModel.saveNames()
+            }
+            .launchIn(lifecycleScope)
     }
 
     private fun initFields() {
@@ -62,7 +74,6 @@ class NameFragment: BaseFragment<FragmentNameBinding>(FragmentNameBinding::infla
 
     private fun setOnBackListener() {
         binding.btnBack.setOnClickListener {
-            viewModel.saveNames()
             MainActivity.activityComponent.navigationController().navigate(R.id.action_nameFragment_to_settingsFragment)
         }
     }

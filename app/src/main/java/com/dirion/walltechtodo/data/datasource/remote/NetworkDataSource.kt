@@ -84,7 +84,15 @@ class NetworkDataSource @Inject constructor(
     }
 
     override suspend fun deleteTask(data: DeleteTaskModelRequest): BaseModelResponse<DeleteTaskModelResponse> {
-        TODO("Not yet implemented")
+        return try {
+            val response = apiService.deleteTask(
+                authorization = "$username:$password",
+                data = data
+            )
+            Success(response)
+        } catch (e: Exception) {
+            Error(e.message.toString())
+        }
     }
 
 

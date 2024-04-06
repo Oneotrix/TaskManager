@@ -26,9 +26,10 @@ class NotesViewModel(private val useCaseWorkWithNotes: UseCaseWorkWithNotes) : V
 
     fun updateData(notes: String) {
         _data.value = notes
+        saveNotes()
     }
 
-    fun saveNotes() {
+    private fun saveNotes() {
         useCaseWorkWithNotes.saveNotes(_data.value)
     }
 

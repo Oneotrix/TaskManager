@@ -10,7 +10,10 @@ interface ITasksRepository {
      suspend fun addTask(name: String, status: String)
 
      suspend fun login(username: String, password: String) : BaseDomainModel<String>
+
      suspend fun updateTask(id: Long, title: String, status: String)
 
      suspend fun getTask(id: Long) : BaseDomainModel<TaskModelDomain>
+
+     suspend fun deleteTask(id: Long)
 }

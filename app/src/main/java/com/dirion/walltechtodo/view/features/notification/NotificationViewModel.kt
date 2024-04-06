@@ -49,9 +49,11 @@ class NotificationViewModel(
         }
 
         _data.value = _data.value.copy(model = NotificationModel(list))
+
+        saveData()
     }
 
-    fun saveData() {
+    private fun saveData() {
         val map: MutableMap<String, Boolean> = mutableMapOf()
 
         _data.value.model.notifications.forEach {

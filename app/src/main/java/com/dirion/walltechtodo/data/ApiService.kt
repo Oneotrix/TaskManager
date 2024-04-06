@@ -13,6 +13,7 @@ import com.dirion.walltechtodo.data.models.network.rest.response.PutUpdateTaskMo
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.HTTP
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -40,11 +41,11 @@ interface ApiService {
         @Header("Authorization") authorization: String,
         @Body data: PutUpdateTaskModelRequest
     ): PutUpdateTaskModelResponse
-    @DELETE("tasks/remove")
+    @HTTP(method = "DELETE", path = "tasks/remove", hasBody = true)
     suspend fun deleteTask(
         @Header("Authorization") authorization: String,
         @Body data: DeleteTaskModelRequest
-    ): BaseModelResponse<DeleteTaskModelResponse>
+    ): DeleteTaskModelResponse
 
     companion object {
         const val BASE_URL = "http://walltech.me/"
