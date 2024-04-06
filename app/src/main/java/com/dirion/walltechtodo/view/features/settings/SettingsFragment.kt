@@ -44,7 +44,7 @@ class SettingsFragment: BaseFragment<FragmentSettingsBinding>(FragmentSettingsBi
 
     private fun onNameFragment() {
         binding.tvName.setOnClickListener {
-            MainActivity.activityComponent.navigationController().navigate(R.id.action_settingsFragment_to_namesFragment)
+            MainActivity.activityComponent.navigationController().navigate(R.id.action_settingsFragment_to_nameFragment)
         }
     }
 

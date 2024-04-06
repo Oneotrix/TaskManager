@@ -5,6 +5,7 @@ import com.dirion.walltechtodo.di.presentation.subcomponents.AddTaskFragmentComp
 import com.dirion.walltechtodo.di.presentation.subcomponents.DateTimeFragmentComponent
 import com.dirion.walltechtodo.di.presentation.subcomponents.EditTaskFragmentComponent
 import com.dirion.walltechtodo.di.presentation.subcomponents.LoginFragmentComponent
+import com.dirion.walltechtodo.di.presentation.subcomponents.NameFragmentComponent
 import com.dirion.walltechtodo.di.presentation.subcomponents.NotesFragmentComponent
 import com.dirion.walltechtodo.di.presentation.subcomponents.NotificationFragmentComponent
 import com.dirion.walltechtodo.di.presentation.subcomponents.TasksFragmentComponent
@@ -28,7 +29,10 @@ interface PresentationComponent {
     fun notificationFragmentComponentBuilder() : NotificationFragmentComponent.Builder
 
     fun dateTimeFragmentComponentBuilder() : DateTimeFragmentComponent.Builder
+
     fun notesFragmentComponentBuilder() : NotesFragmentComponent.Builder
+
+    fun nameFragmentComponentBuilder() : NameFragmentComponent.Builder
 
     @Subcomponent.Builder
     interface Builder {

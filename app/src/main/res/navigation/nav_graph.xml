@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/tasksFragment">
+    app:startDestination="@id/nameFragment">
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.dirion.walltechtodo.view.features.login.LoginFragment"
@@ -25,9 +25,9 @@
     </fragment>
     <fragment
         android:id="@+id/dataTimeFragment"
-        android:name="com.dirion.walltechtodo.view.features.data_time.DataTimeFragment"
+        android:name="com.dirion.walltechtodo.view.features.data_time.DateTimeFragment"
         android:label="DataTimeFragment"
-        tools:layout="@layout/fragment_data_time"
+        tools:layout="@layout/fragment_date_time"
         >
         <action
             android:id="@+id/action_dataTimeFragment_to_settingsFragment"
@@ -42,16 +42,6 @@
         <action
             android:id="@+id/action_editTaskFragment_to_tasksFragment"
             app:destination="@id/tasksFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/namesFragment"
-        android:name="com.dirion.walltechtodo.view.features.names.NamesFragment"
-        android:label="NamesFragment"
-        tools:layout="@layout/fragment_names"
-        >
-        <action
-            android:id="@+id/action_namesFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/notesFragment"
@@ -90,13 +80,16 @@
             app:destination="@id/notesFragment" />
         <action
             android:id="@+id/action_settingsFragment_to_namesFragment"
-            app:destination="@id/namesFragment" />
+            app:destination="@id/nameFragment" />
         <action
             android:id="@+id/action_settingsFragment_to_volumeFragment"
             app:destination="@id/volumeFragment" />
         <action
             android:id="@+id/action_settingsFragment_to_tasksFragment"
             app:destination="@id/tasksFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_nameFragment"
+            app:destination="@id/nameFragment" />
     </fragment>
     <fragment
         android:id="@+id/tasksFragment"
@@ -122,6 +115,16 @@
         >
         <action
             android:id="@+id/action_volumeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nameFragment"
+        android:name="com.dirion.walltechtodo.view.features.name.NameFragment"
+        android:label="NameFragment"
+
+        >
+        <action
+            android:id="@+id/action_nameFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
     </fragment>
 

@@ -9,7 +9,7 @@ import com.dirion.walltechtodo.MainActivity
 import com.dirion.walltechtodo.R
 import com.dirion.walltechtodo.databinding.FragmentNotesBinding
 import com.dirion.walltechtodo.view.features.BaseFragment
-import com.dirion.walltechtodo.view.features.names.NamesFragment
+import com.dirion.walltechtodo.view.features.name.NameFragment
 import javax.inject.Inject
 
 class NotesFragment: BaseFragment<FragmentNotesBinding>(FragmentNotesBinding::inflate){
@@ -55,7 +55,7 @@ class NotesFragment: BaseFragment<FragmentNotesBinding>(FragmentNotesBinding::in
     }
 
     companion object {
-        fun newInstance() = NamesFragment()
+        fun newInstance() = NameFragment()
     }
 
 }

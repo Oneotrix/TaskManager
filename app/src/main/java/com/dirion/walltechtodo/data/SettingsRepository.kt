@@ -66,4 +66,21 @@ class SettingsRepository @Inject constructor(
             .orEmpty()
 
     }
+
+    override fun saveNames(firstName: String, familyName: String) {
+        val pair = Pair(firstName, familyName)
+        val jsonString = json.encodeToJsonElement(pair).toString()
+        sharedPrefsHelper.writer
+            .putString("name", jsonString)
+            .commit()
+    }
+
+    override fun getNames(): Pair<String, String>? {
+        val names = sharedPrefsHelper.reader.getString("name", null).orEmpty()
+        return try {
+            json.decodeFromString<Pair<String, String>>(names)
+        } catch (e: Exception) {
+            return null
+        }
+    }
 }

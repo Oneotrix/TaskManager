@@ -16,4 +16,7 @@ interface ISettingsRepository {
     fun saveNotes(notes: String)
 
     fun getNotes() : String
+
+    fun saveNames(firstName: String, familyName: String)
+    fun getNames() : Pair<String, String>?
 }
