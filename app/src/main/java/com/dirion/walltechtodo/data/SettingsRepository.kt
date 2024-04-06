@@ -37,4 +37,20 @@ class SettingsRepository @Inject constructor(
         return sharedPrefsHelper.reader
             .getLong("date", 0)
     }
+
+    override fun saveTime(time: Pair<Int, Int>) {
+        val jsonString = json.encodeToJsonElement(time).toString()
+        sharedPrefsHelper.writer
+            .putString("time", jsonString)
+            .commit()
+    }
+
+    override fun getTime(): Pair<Int, Int>? {
+        val time = sharedPrefsHelper.reader.getString("time", null).orEmpty()
+        return try {
+            json.decodeFromString<Pair<Int, Int>>(time)
+        } catch (e: Exception) {
+            return null
+        }
+    }
 }

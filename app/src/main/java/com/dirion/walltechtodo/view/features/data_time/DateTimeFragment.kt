@@ -1,16 +1,16 @@
 package com.dirion.walltechtodo.view.features.data_time
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.dirion.walltechtodo.App
+import com.dirion.walltechtodo.MainActivity
+import com.dirion.walltechtodo.R
 import com.dirion.walltechtodo.databinding.FragmentDateTimeBinding
 import com.dirion.walltechtodo.view.features.BaseFragment
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.timepicker.MaterialTimePicker
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import java.text.SimpleDateFormat
@@ -43,42 +43,68 @@ class DateTimeFragment: BaseFragment<FragmentDateTimeBinding>(FragmentDateTimeBi
 
     }
 
-    private fun setDateEditTextHint(date: String) {
-        if (binding.etDateInput.isFocused) {
-            binding.etDateInput.hint = ""
-        } else {
-            binding.etDateInput.hint = date
-        }
+    private fun setDateEditTextValue(date: String) {
+        binding.etDateInput.setText(date)
+    }
+
+    private fun setTimeEditTextValue(hour: Int, minute: Int) {
+        val mode = if (hour > 12) "PM" else "AM"
+        val formatHour = if (hour > 12) { hour - 12 } else hour
+
+        val time = "$formatHour:$minute $mode"
+        binding.etTimeInput.setText(time)
     }
 
     private fun observeData() {
         viewModel.date
             .onEach {
-                setDateEditTextHint(formatDate(it.timestamp))
+                setDateEditTextValue(formatDate(it.timestamp))
+            }
+            .launchIn(lifecycleScope)
+
+        viewModel.time
+            .onEach {
+                setTimeEditTextValue(hour = it.hour, minute = it.minute)
             }
             .launchIn(lifecycleScope)
     }
 
     private fun setListeners() {
         setDateListeners()
+        setTimeListeners()
+        setOnBackListener()
     }
 
     private fun setDateListeners() {
-        binding.etDateInput.setOnFocusChangeListener { view, inFocuse ->
-            if (inFocuse) {
-                binding.vgDateInput.isHintEnabled = true
-                binding.vgDateInput.hint = "Date"
-                binding.etDateInput.hint = ""
-            } else {
-                binding.vgDateInput.isHintEnabled = false
-            }
-        }
-
         binding.vgDateInput.setEndIconOnClickListener {
-
             datePicker().show(parentFragmentManager, "datePicker")
-
         }
+    }
+
+    private fun setTimeListeners() {
+        binding.vgTimeInput.setEndIconOnClickListener {
+            timePicker().show(parentFragmentManager, "timePicker")
+        }
+    }
+
+    private fun setOnBackListener() {
+        binding.btnBack.setOnClickListener {
+            MainActivity.activityComponent.navigationController().navigate(R.id.action_dataTimeFragment_to_settingsFragment)
+        }
+    }
+
+    private fun timePicker(): MaterialTimePicker {
+        val timePicker =
+            MaterialTimePicker.Builder()
+                .setHour(viewModel.time.value.hour)
+                .setMinute(viewModel.time.value.minute)
+                .build()
+
+        timePicker.addOnPositiveButtonClickListener {
+            viewModel.setTime(hour = timePicker.hour, minute = timePicker.minute)
+        }
+
+        return timePicker
     }
 
     private fun datePicker(): MaterialDatePicker<Long> {

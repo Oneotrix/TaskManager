@@ -2,14 +2,14 @@ package com.dirion.walltechtodo.view.features.data_time
 
 import androidx.lifecycle.ViewModel
 import com.dirion.walltechtodo.domain.usecase.UseCaseWorkWithDate
+import com.dirion.walltechtodo.domain.usecase.UseCaseWorkWithTime
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Date
 
 class DateTimeViewModel(
-    private val useCaseWorkWithDate: UseCaseWorkWithDate
+    private val useCaseWorkWithDate: UseCaseWorkWithDate,
+    private val useCaseWorkWithTime: UseCaseWorkWithTime,
 ) : ViewModel() {
 
     private val _date = MutableStateFlow(UiState.Date())
@@ -23,6 +23,20 @@ class DateTimeViewModel(
     }
 
     private fun initTime() {
+
+        var time = useCaseWorkWithTime.getTime()
+
+        if (time == null) {
+            val calendar = Calendar.getInstance()
+
+            val h = calendar.get(Calendar.HOUR_OF_DAY)
+            val m = calendar.get(Calendar.MINUTE)
+
+            time = Pair(h, m)
+        }
+
+        _time.value = UiState.Time(hour = time.first, minute = time.second)
+
     }
 
     private fun initDate() {
@@ -40,10 +54,18 @@ class DateTimeViewModel(
         useCaseWorkWithDate.saveDate(timestamp)
     }
 
+    fun setTime(hour: Int, minute: Int ) {
+        _time.value = _time.value.copy(hour = hour, minute = minute)
+        useCaseWorkWithTime.saveTime(Pair(hour, minute))
+    }
+
 
     sealed class UiState() {
         data class Date(val timestamp: Long = 0) : UiState()
-        data class Time(val timestamp: Long = 0) : UiState()
+        data class Time(
+            val hour: Int = 0,
+            val minute: Int = 0,
+        ) : UiState()
 
     }
 }

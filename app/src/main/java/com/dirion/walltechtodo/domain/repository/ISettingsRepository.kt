@@ -8,4 +8,8 @@ interface ISettingsRepository {
 
     fun saveDateTimestamp(timestamp: Long)
     fun getDateTimestamp() : Long
+
+    fun saveTime(time: Pair<Int, Int>)
+
+    fun getTime() : Pair<Int, Int>?
 }
