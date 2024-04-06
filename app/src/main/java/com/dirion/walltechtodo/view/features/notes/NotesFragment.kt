@@ -1,29 +1,58 @@
 package com.dirion.walltechtodo.view.features.notes
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.viewModels
+import com.dirion.walltechtodo.App
+import com.dirion.walltechtodo.MainActivity
+import com.dirion.walltechtodo.R
 import com.dirion.walltechtodo.databinding.FragmentNotesBinding
+import com.dirion.walltechtodo.view.features.BaseFragment
 import com.dirion.walltechtodo.view.features.names.NamesFragment
+import javax.inject.Inject
 
-class NotesFragment: Fragment(){
+class NotesFragment: BaseFragment<FragmentNotesBinding>(FragmentNotesBinding::inflate){
 
-    private lateinit var binding: FragmentNotesBinding
+    @Inject
+    lateinit var viewModelFactory: NotesViewModelFactory
 
+    private val viewModel: NotesViewModel by viewModels { viewModelFactory }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreate(savedInstanceState: Bundle?) {
 
-        binding = FragmentNotesBinding.inflate(inflater, container, false)
+        App.presentationComponent.notesFragmentComponentBuilder()
+            .build()
+            .inject(this@NotesFragment)
 
-        return binding.root
+        super.onCreate(savedInstanceState)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.etNotes.requestFocus()
+
+        setStartText()
+        setOnBackListener()
+        setOnNotesChangeListener()
+    }
+
+    private fun setOnBackListener() {
+        binding.btnBack.setOnClickListener {
+            viewModel.saveNotes()
+            MainActivity.activityComponent.navigationController().navigate(R.id.action_notesFragment_to_settingsFragment)
+        }
+    }
+
+    private fun setOnNotesChangeListener() {
+        binding.etNotes.doOnTextChanged { text, start, before, count ->
+            viewModel.updateData(text.toString())
+        }
+    }
+
+    private fun setStartText() {
+        binding.etNotes.setText(viewModel.data.value)
+    }
 
     companion object {
         fun newInstance() = NamesFragment()

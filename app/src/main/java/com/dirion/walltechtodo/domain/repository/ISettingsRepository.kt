@@ -12,4 +12,8 @@ interface ISettingsRepository {
     fun saveTime(time: Pair<Int, Int>)
 
     fun getTime() : Pair<Int, Int>?
+
+    fun saveNotes(notes: String)
+
+    fun getNotes() : String
 }

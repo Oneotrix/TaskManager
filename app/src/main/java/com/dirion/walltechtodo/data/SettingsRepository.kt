@@ -53,4 +53,17 @@ class SettingsRepository @Inject constructor(
             return null
         }
     }
+
+    override fun saveNotes(notes: String) {
+        sharedPrefsHelper.writer
+            .putString("notes", notes)
+            .commit()
+    }
+
+    override fun getNotes(): String {
+        return sharedPrefsHelper.reader
+            .getString("notes", "")
+            .orEmpty()
+
+    }
 }
