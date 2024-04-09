@@ -25,7 +25,7 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::in
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        App.presentationComponent.loginFragmentComponentBuilder()
+        App.taskComponent.loginFragmentComponentBuilder()
             .build()
             .inject(this)
 
@@ -76,7 +76,7 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::in
     }
 
     private fun navigateToTasks() {
-        MainActivity.activityComponent.navigationController()
+        MainActivity.navigationComponent.navigationController()
             .navigate(R.id.action_loginFragment_to_tasksFragment)
     }
 

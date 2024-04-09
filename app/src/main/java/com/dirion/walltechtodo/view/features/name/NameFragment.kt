@@ -23,7 +23,7 @@ class NameFragment: BaseFragment<FragmentNameBinding>(FragmentNameBinding::infla
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        App.presentationComponent.nameFragmentComponentBuilder()
+        App.settingsComponent.nameFragmentComponentBuilder()
             .build()
             .inject(this@NameFragment)
 
@@ -74,7 +74,7 @@ class NameFragment: BaseFragment<FragmentNameBinding>(FragmentNameBinding::infla
 
     private fun setOnBackListener() {
         binding.btnBack.setOnClickListener {
-            MainActivity.activityComponent.navigationController().navigate(R.id.action_nameFragment_to_settingsFragment)
+            MainActivity.navigationComponent.navigationController().navigate(R.id.action_nameFragment_to_settingsFragment)
         }
     }
 

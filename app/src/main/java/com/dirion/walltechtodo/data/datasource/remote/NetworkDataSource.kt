@@ -1,6 +1,7 @@
 package com.dirion.walltechtodo.data.datasource.remote
 
 import com.dirion.walltechtodo.data.ApiService
+import com.dirion.walltechtodo.data.datasource.local.LocalDataSource
 import com.dirion.walltechtodo.data.datasource.local.shared_prefs.SharedPrefsHelper
 import com.dirion.walltechtodo.data.models.network.rest.request.delete.DeleteTaskModelRequest
 import com.dirion.walltechtodo.data.models.network.rest.request.get.GetTasksModelRequest
@@ -16,19 +17,20 @@ import com.dirion.walltechtodo.data.models.network.rest.response.PostLoginModelR
 import com.dirion.walltechtodo.data.models.network.rest.response.PutUpdateTaskModelResponse
 import retrofit2.HttpException
 import javax.inject.Inject
+import javax.inject.Singleton
 
-/*TODO Создаются разные объекты каждый раз, проблема скопа*/
+@Singleton
 class NetworkDataSource @Inject constructor(
     private val apiService: ApiService,
     private val sharedPrefsHelper: SharedPrefsHelper
 ) : INetworkDataSource {
 
     private val username by lazy {
-        sharedPrefsHelper.reader.getString("username", null)
+        sharedPrefsHelper.reader.getString(LocalDataSource.USERNAME, null)
     }
 
     private val password by lazy {
-        sharedPrefsHelper.reader.getString("password", null)
+        sharedPrefsHelper.reader.getString(LocalDataSource.PASSWORD, null)
     }
 
 

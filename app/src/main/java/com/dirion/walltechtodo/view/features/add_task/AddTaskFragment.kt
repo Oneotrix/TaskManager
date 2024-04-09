@@ -43,7 +43,7 @@ class AddTaskFragment: BottomSheetDialogFragment(){
     private val viewModel: AddTaskViewModel by viewModels { viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        App.presentationComponent.addTaskDialogBottomSheetBuilder()
+        App.taskComponent.addTaskFragmentComponentBuilder()
             .build()
             .inject(this)
 

@@ -38,8 +38,7 @@ class TasksFragment : BaseFragment<FragmentTasksBinding>(FragmentTasksBinding::i
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        App.presentationComponent
-            .tasksFragmentComponentBuilder()
+        App.taskComponent.tasksFragmentComponentBuilder()
             .build()
             .inject(this)
 

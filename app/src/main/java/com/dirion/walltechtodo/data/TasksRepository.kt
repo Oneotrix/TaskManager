@@ -9,7 +9,6 @@ import com.dirion.walltechtodo.data.models.network.rest.request.post.PostAddTask
 import com.dirion.walltechtodo.data.models.network.rest.request.post.PostLoginModelRequest
 import com.dirion.walltechtodo.data.models.network.rest.request.put.PutUpdateTaskModelRequest
 import com.dirion.walltechtodo.data.models.network.rest.response.BaseModelResponse.*
-import com.dirion.walltechtodo.di.scope.ScopeApplication
 import com.dirion.walltechtodo.domain.models.BaseDomainModel
 import com.dirion.walltechtodo.domain.models.TaskModelDomain
 import com.dirion.walltechtodo.domain.repository.ITasksRepository
@@ -17,12 +16,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-@ScopeApplication
 class TasksRepository @Inject constructor(
     val networkDataSource: NetworkDataSource,
     val localDataSource:  LocalDataSource,
 ): ITasksRepository {
-
 
 
     override suspend fun fetchTasks(): Flow<List<TaskModelDomain>> {

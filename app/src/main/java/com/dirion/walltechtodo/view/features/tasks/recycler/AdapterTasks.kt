@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.ListAdapter
 import com.dirion.walltechtodo.databinding.ItemTasksListBinding
 import com.dirion.walltechtodo.utils.Comparator
 import com.dirion.walltechtodo.view.features.tasks.TaskModel
-import com.dirion.walltechtodo.view.features.tasks.recycler.gesture.ItemDeleteListener
 
 
 class AdapterTasks(

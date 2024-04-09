@@ -8,10 +8,8 @@ import com.dirion.walltechtodo.App
 import com.dirion.walltechtodo.MainActivity
 import com.dirion.walltechtodo.R
 import com.dirion.walltechtodo.databinding.FragmentNotificationsBinding
-import com.dirion.walltechtodo.utils.TestData
 import com.dirion.walltechtodo.view.features.BaseFragment
 import com.dirion.walltechtodo.view.features.notification.recycler.AdapterNotification
-import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 class NotificationsFragment: BaseFragment<FragmentNotificationsBinding>(FragmentNotificationsBinding::inflate){
@@ -29,7 +27,7 @@ class NotificationsFragment: BaseFragment<FragmentNotificationsBinding>(Fragment
     private val viewModel: NotificationViewModel by viewModels { viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        App.presentationComponent.notificationFragmentComponentBuilder()
+        App.settingsComponent.notificationFragmentComponentBuilder()
             .build()
             .inject(this@NotificationsFragment)
 
@@ -52,11 +50,9 @@ class NotificationsFragment: BaseFragment<FragmentNotificationsBinding>(Fragment
 
     private fun setOnBackListener() {
         binding.btnBack.setOnClickListener {
-            MainActivity.activityComponent.navigationController().navigate(R.id.action_notificationsFragment_to_settingsFragment)
+            MainActivity.navigationComponent.navigationController().navigate(R.id.action_notificationsFragment_to_settingsFragment)
         }
     }
-
-
 
     companion object {
         fun newInstance() = NotificationsFragment()

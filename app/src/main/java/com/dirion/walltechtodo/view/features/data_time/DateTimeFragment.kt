@@ -27,7 +27,7 @@ class DateTimeFragment: BaseFragment<FragmentDateTimeBinding>(FragmentDateTimeBi
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        App.presentationComponent.dateTimeFragmentComponentBuilder()
+        App.settingsComponent.dateTimeFragmentComponentBuilder()
             .build()
             .inject(this@DateTimeFragment)
 
@@ -89,7 +89,7 @@ class DateTimeFragment: BaseFragment<FragmentDateTimeBinding>(FragmentDateTimeBi
 
     private fun setOnBackListener() {
         binding.btnBack.setOnClickListener {
-            MainActivity.activityComponent.navigationController().navigate(R.id.action_dataTimeFragment_to_settingsFragment)
+            MainActivity.navigationComponent.navigationController().navigate(R.id.action_dataTimeFragment_to_settingsFragment)
         }
     }
 

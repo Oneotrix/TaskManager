@@ -6,7 +6,6 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Color
-import android.util.Log
 import android.view.Gravity
 import android.view.ViewGroup.LayoutParams
 import android.view.ViewGroup.TEXT_ALIGNMENT_CENTER
@@ -17,7 +16,6 @@ import com.dirion.walltechtodo.view.global.SizeExtensions.dp
 import com.dirion.walltechtodo.view.global.SizeExtensions.sp
 import com.dirion.walltechtodo.view.features.tasks.TaskModel
 import com.dirion.walltechtodo.view.features.tasks.recycler.gesture.GestureListener
-import com.dirion.walltechtodo.view.features.tasks.recycler.gesture.ItemDeleteListener
 import com.dirion.walltechtodo.view.features.tasks.recycler.gesture.OnSwipeTouchListener
 
 

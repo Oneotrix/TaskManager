@@ -21,7 +21,7 @@ class NotesFragment: BaseFragment<FragmentNotesBinding>(FragmentNotesBinding::in
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        App.presentationComponent.notesFragmentComponentBuilder()
+        App.settingsComponent.notesFragmentComponentBuilder()
             .build()
             .inject(this@NotesFragment)
 
@@ -39,7 +39,7 @@ class NotesFragment: BaseFragment<FragmentNotesBinding>(FragmentNotesBinding::in
 
     private fun setOnBackListener() {
         binding.btnBack.setOnClickListener {
-            MainActivity.activityComponent.navigationController().navigate(R.id.action_notesFragment_to_settingsFragment)
+            MainActivity.navigationComponent.navigationController().navigate(R.id.action_notesFragment_to_settingsFragment)
         }
     }
 

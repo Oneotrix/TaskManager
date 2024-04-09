@@ -2,41 +2,37 @@ package com.dirion.walltechtodo
 
 import android.app.Application
 import android.util.DisplayMetrics
-import com.dirion.walltechtodo.di.AppComponent
-import com.dirion.walltechtodo.di.DaggerAppComponent
-import com.dirion.walltechtodo.di.data.DataComponent
-import com.dirion.walltechtodo.di.domain.DomainComponent
-import com.dirion.walltechtodo.di.presentation.PresentationComponent
+import com.dirion.walltechtodo.di.app.AppComponent
+import com.dirion.walltechtodo.di.app.DaggerAppComponent
+import com.dirion.walltechtodo.di.navgation.NavigationComponent
+import com.dirion.walltechtodo.di.settings.SettingsComponent
+import com.dirion.walltechtodo.di.task.TaskComponent
 
 class App: Application() {
 
     override fun onCreate() {
         super.onCreate()
 
-        appComponent = DaggerAppComponent.builder()
-            .context(this@App)
+        appComponent = DaggerAppComponent.factory()
+            .create(this@App)
+
+        taskComponent = appComponent.provideTaskComponentBuilder()
             .build()
 
-        presentationComponent = appComponent.presentationComponentBuilder()
+        settingsComponent = appComponent.provideSettingsComponentBuilder()
             .build()
 
-        dataComponent = appComponent.dataComponentBuilder()
-            .build()
-
-        domainComponent = appComponent.domainComponentBuilder()
-            .build()
-
+        navigationComponentFactory = appComponent.provideNavigationComponentFactory()
 
         displayMetrics = resources.displayMetrics
     }
 
 
     companion object {
-
         private lateinit var appComponent: AppComponent
-        lateinit var presentationComponent: PresentationComponent
-        lateinit var dataComponent: DataComponent
-        lateinit var domainComponent: DomainComponent
+        lateinit var taskComponent : TaskComponent
+        lateinit var settingsComponent: SettingsComponent
+        lateinit var navigationComponentFactory: NavigationComponent.Factory
         lateinit var displayMetrics: DisplayMetrics
     }
 }

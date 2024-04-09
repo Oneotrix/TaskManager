@@ -6,7 +6,6 @@ import com.dirion.walltechtodo.MainActivity
 import com.dirion.walltechtodo.R
 import com.dirion.walltechtodo.databinding.FragmentSettingsBinding
 import com.dirion.walltechtodo.view.features.BaseFragment
-import com.dirion.walltechtodo.view.features.login.LoginFragment
 
 class SettingsFragment: BaseFragment<FragmentSettingsBinding>(FragmentSettingsBinding::inflate){
 
@@ -33,37 +32,37 @@ class SettingsFragment: BaseFragment<FragmentSettingsBinding>(FragmentSettingsBi
 
     private fun onNotificationFragment() {
         binding.tvNotifications.setOnClickListener {
-            MainActivity.activityComponent.navigationController().navigate(R.id.action_settingsFragment_to_notificationsFragment)
+            MainActivity.navigationComponent.navigationController().navigate(R.id.action_settingsFragment_to_notificationsFragment)
         }
     }
 
     private fun onDateTimeFragment() {
         binding.tvDate.setOnClickListener {
-            MainActivity.activityComponent.navigationController().navigate(R.id.action_settingsFragment_to_dataTimeFragment)
+            MainActivity.navigationComponent.navigationController().navigate(R.id.action_settingsFragment_to_dataTimeFragment)
         }
     }
 
     private fun onNotesFragment() {
         binding.tvNotes.setOnClickListener {
-            MainActivity.activityComponent.navigationController().navigate(R.id.action_settingsFragment_to_notesFragment)
+            MainActivity.navigationComponent.navigationController().navigate(R.id.action_settingsFragment_to_notesFragment)
         }
     }
 
     private fun onNameFragment() {
         binding.tvName.setOnClickListener {
-            MainActivity.activityComponent.navigationController().navigate(R.id.action_settingsFragment_to_nameFragment)
+            MainActivity.navigationComponent.navigationController().navigate(R.id.action_settingsFragment_to_nameFragment)
         }
     }
 
     private fun onVolumeFragment() {
         binding.tvVolume.setOnClickListener {
-            MainActivity.activityComponent.navigationController().navigate(R.id.action_settingsFragment_to_volumeFragment)
+            MainActivity.navigationComponent.navigationController().navigate(R.id.action_settingsFragment_to_volumeFragment)
         }
     }
 
     private fun onLoginFragment() {
         binding.tvLogOut.setOnClickListener {
-            MainActivity.activityComponent.navigationController().navigate(R.id.action_settingsFragment_to_loginFragment)
+            MainActivity.navigationComponent.navigationController().navigate(R.id.action_settingsFragment_to_loginFragment)
         }
     }
 

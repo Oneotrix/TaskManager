@@ -3,7 +3,7 @@ package com.dirion.walltechtodo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.dirion.walltechtodo.databinding.ActivityMainBinding
-import com.dirion.walltechtodo.di.presentation.subcomponents.ActivityComponent
+import com.dirion.walltechtodo.di.navgation.NavigationComponent
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.GONE
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
@@ -18,12 +18,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setTabListener()
-        activityComponent = App.presentationComponent
-            .activityComponentBuilder()
-            .activity(this@MainActivity)
-            .build()
+        navigationComponent = App.navigationComponentFactory
+            .create(this@MainActivity)
 
+
+        setTabListener()
     }
 
     private fun setTabListener() {
@@ -31,11 +30,11 @@ class MainActivity : AppCompatActivity() {
             override fun onTabSelected(p0: TabLayout.Tab) {
                 when(p0.position) {
                     0 -> {
-                        activityComponent.navigationController().navigate(R.id.action_settingsFragment_to_tasksFragment)
+                        navigationComponent.navigationController().navigate(R.id.action_settingsFragment_to_tasksFragment)
                     }
 
                     1 -> {
-                        activityComponent.navigationController().navigate(R.id.action_tasksFragment_to_settingsFragment)
+                        navigationComponent.navigationController().navigate(R.id.action_tasksFragment_to_settingsFragment)
                     }
                 }
             }
@@ -61,10 +60,9 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
 
-        lateinit var activityComponent: ActivityComponent
+        lateinit var navigationComponent: NavigationComponent
 
     }
-
 }
 
 

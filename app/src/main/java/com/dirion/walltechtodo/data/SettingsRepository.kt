@@ -1,5 +1,6 @@
 package com.dirion.walltechtodo.data
 
+import com.dirion.walltechtodo.data.datasource.local.LocalDataSource
 import com.dirion.walltechtodo.data.datasource.local.shared_prefs.SharedPrefsHelper
 import com.dirion.walltechtodo.domain.repository.ISettingsRepository
 import kotlinx.serialization.json.Json
@@ -10,15 +11,16 @@ class SettingsRepository @Inject constructor(
     private val sharedPrefsHelper: SharedPrefsHelper,
     private val json: Json
 ): ISettingsRepository {
+
     override fun saveUsersNotifications(map: Map<String, Boolean>) {
         val jsonString = json.encodeToJsonElement(map).toString()
         sharedPrefsHelper.writer
-            .putString("notifications", jsonString)
+            .putString(LocalDataSource.NOTIFICATIONS, jsonString)
             .commit()
     }
 
     override fun getUsersNotifications(): Map<String, Boolean> {
-        val notification = sharedPrefsHelper.reader.getString("notifications", null).orEmpty()
+        val notification = sharedPrefsHelper.reader.getString(LocalDataSource.NOTIFICATIONS, null).orEmpty()
 
         return try {
             json.decodeFromString<Map<String, Boolean>>(notification)
@@ -29,24 +31,24 @@ class SettingsRepository @Inject constructor(
 
     override fun saveDateTimestamp(timestamp: Long) {
         sharedPrefsHelper.writer
-            .putLong("date", timestamp)
+            .putLong(LocalDataSource.DATE, timestamp)
             .commit()
     }
 
     override fun getDateTimestamp(): Long {
         return sharedPrefsHelper.reader
-            .getLong("date", 0)
+            .getLong(LocalDataSource.DATE, 0)
     }
 
     override fun saveTime(time: Pair<Int, Int>) {
         val jsonString = json.encodeToJsonElement(time).toString()
         sharedPrefsHelper.writer
-            .putString("time", jsonString)
+            .putString(LocalDataSource.TIME, jsonString)
             .commit()
     }
 
     override fun getTime(): Pair<Int, Int>? {
-        val time = sharedPrefsHelper.reader.getString("time", null).orEmpty()
+        val time = sharedPrefsHelper.reader.getString(LocalDataSource.TIME, null).orEmpty()
         return try {
             json.decodeFromString<Pair<Int, Int>>(time)
         } catch (e: Exception) {
@@ -56,13 +58,13 @@ class SettingsRepository @Inject constructor(
 
     override fun saveNotes(notes: String) {
         sharedPrefsHelper.writer
-            .putString("notes", notes)
+            .putString(LocalDataSource.NOTES, notes)
             .commit()
     }
 
     override fun getNotes(): String {
         return sharedPrefsHelper.reader
-            .getString("notes", "")
+            .getString(LocalDataSource.NOTES, "")
             .orEmpty()
 
     }
@@ -71,12 +73,12 @@ class SettingsRepository @Inject constructor(
         val pair = Pair(firstName, familyName)
         val jsonString = json.encodeToJsonElement(pair).toString()
         sharedPrefsHelper.writer
-            .putString("name", jsonString)
+            .putString(LocalDataSource.NAME, jsonString)
             .commit()
     }
 
     override fun getNames(): Pair<String, String>? {
-        val names = sharedPrefsHelper.reader.getString("name", null).orEmpty()
+        val names = sharedPrefsHelper.reader.getString(LocalDataSource.NAME, null).orEmpty()
         return try {
             json.decodeFromString<Pair<String, String>>(names)
         } catch (e: Exception) {
@@ -86,12 +88,12 @@ class SettingsRepository @Inject constructor(
 
     override fun saveVolumeValue(value: Float) {
         sharedPrefsHelper.writer
-            .putFloat("volume", value)
+            .putFloat(LocalDataSource.VOLUME, value)
             .commit()
     }
 
     override fun getVolumeValue(): Float {
         return sharedPrefsHelper.reader
-            .getFloat("volume", 0f)
+            .getFloat(LocalDataSource.VOLUME, 0f)
     }
 }

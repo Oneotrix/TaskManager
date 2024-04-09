@@ -20,7 +20,7 @@ class VolumeFragment: BaseFragment<FragmentVolumeBinding>(FragmentVolumeBinding:
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        App.presentationComponent.volumeFragmentComponentBuilder()
+        App.settingsComponent.volumeFragmentComponentBuilder()
             .build()
             .inject(this@VolumeFragment)
 
@@ -49,7 +49,7 @@ class VolumeFragment: BaseFragment<FragmentVolumeBinding>(FragmentVolumeBinding:
 
     private fun setOnBackListener() {
         binding.btnBack.setOnClickListener {
-            MainActivity.activityComponent.navigationController().navigate(R.id.action_volumeFragment_to_settingsFragment)
+            MainActivity.navigationComponent.navigationController().navigate(R.id.action_volumeFragment_to_settingsFragment)
         }
     }
 
