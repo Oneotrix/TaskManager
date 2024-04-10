@@ -1,6 +1,6 @@
 package com.dirion.walltechtodo.data.mapper
 
-import com.dirion.walltechtodo.data.datasource.local.room.Task
+import com.dirion.walltechtodo.data.datasource.localSource.room.Task
 import com.dirion.walltechtodo.data.models.network.rest.response.GetTaskModelResponse
 import com.dirion.walltechtodo.domain.models.TaskModelDomain
 

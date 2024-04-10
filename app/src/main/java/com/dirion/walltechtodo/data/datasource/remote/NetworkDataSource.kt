@@ -1,8 +1,8 @@
 package com.dirion.walltechtodo.data.datasource.remote
 
 import com.dirion.walltechtodo.data.ApiService
-import com.dirion.walltechtodo.data.datasource.local.LocalDataSource
-import com.dirion.walltechtodo.data.datasource.local.shared_prefs.SharedPrefsHelper
+import com.dirion.walltechtodo.data.datasource.localSource.LocalDataSource
+import com.dirion.walltechtodo.data.datasource.localSource.shared_prefs.SharedPrefsHelper
 import com.dirion.walltechtodo.data.models.network.rest.request.delete.DeleteTaskModelRequest
 import com.dirion.walltechtodo.data.models.network.rest.request.get.GetTasksModelRequest
 import com.dirion.walltechtodo.data.models.network.rest.request.post.PostAddTaskModelRequest

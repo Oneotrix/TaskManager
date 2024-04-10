@@ -1,7 +1,7 @@
 package com.dirion.walltechtodo.data
 
-import com.dirion.walltechtodo.data.datasource.local.LocalDataSource
-import com.dirion.walltechtodo.data.datasource.local.room.Task
+import com.dirion.walltechtodo.data.datasource.localSource.LocalDataSource
+import com.dirion.walltechtodo.data.datasource.localSource.room.Task
 import com.dirion.walltechtodo.data.datasource.remote.NetworkDataSource
 import com.dirion.walltechtodo.data.mapper.MapperResponse
 import com.dirion.walltechtodo.data.models.network.rest.request.delete.DeleteTaskModelRequest

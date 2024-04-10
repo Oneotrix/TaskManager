@@ -2,9 +2,9 @@ package com.dirion.walltechtodo.di.task.module
 
 import com.dirion.walltechtodo.data.ApiService
 import com.dirion.walltechtodo.data.TasksRepository
-import com.dirion.walltechtodo.data.datasource.local.LocalDataSource
-import com.dirion.walltechtodo.data.datasource.local.room.AppDatabase
-import com.dirion.walltechtodo.data.datasource.local.shared_prefs.SharedPrefsHelper
+import com.dirion.walltechtodo.data.datasource.localSource.LocalDataSource
+import com.dirion.walltechtodo.data.datasource.localSource.room.AppDatabase
+import com.dirion.walltechtodo.data.datasource.localSource.shared_prefs.SharedPrefsHelper
 import com.dirion.walltechtodo.data.datasource.remote.NetworkDataSource
 import com.dirion.walltechtodo.di.task.TaskScope
 import com.dirion.walltechtodo.domain.repository.ITasksRepository

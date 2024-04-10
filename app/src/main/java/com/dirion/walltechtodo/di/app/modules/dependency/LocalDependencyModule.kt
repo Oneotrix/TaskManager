@@ -3,7 +3,7 @@ package com.dirion.walltechtodo.di.app.modules.dependency
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
-import com.dirion.walltechtodo.data.datasource.local.room.AppDatabase
+import com.dirion.walltechtodo.data.datasource.localSource.room.AppDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

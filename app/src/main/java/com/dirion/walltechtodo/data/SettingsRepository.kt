@@ -1,7 +1,7 @@
 package com.dirion.walltechtodo.data
 
-import com.dirion.walltechtodo.data.datasource.local.LocalDataSource
-import com.dirion.walltechtodo.data.datasource.local.shared_prefs.SharedPrefsHelper
+import com.dirion.walltechtodo.data.datasource.localSource.LocalDataSource
+import com.dirion.walltechtodo.data.datasource.localSource.shared_prefs.SharedPrefsHelper
 import com.dirion.walltechtodo.domain.repository.ISettingsRepository
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.encodeToJsonElement
