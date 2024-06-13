@@ -21,16 +21,16 @@ class LoginViewModel(
 
         when(result) {
             is BaseDomainModel.Success -> {
-                _events.emit(Event.LoginSuccess)
+                _events.emit(Event.LoginSuccess(result.data.toInt()))
             }
             else -> {
-                _events.emit(Event.LoginError(result.message.orEmpty()))
+                _events.emit(Event.LoginError(result.message.toString()))
             }
         }
     }
 
     sealed class Event {
-        object LoginSuccess : Event()
+        data class LoginSuccess(val role: Int) : Event()
         class LoginError(val message: String) : Event()
     }
 }

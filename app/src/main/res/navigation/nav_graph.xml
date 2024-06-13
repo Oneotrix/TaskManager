@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/addTaskFragment"
-        android:name="com.dirion.walltechtodo.view.features.add_task.AddTaskFragment"
+        android:name="com.dirion.walltechtodo.view.features.add_order.AddOrderFragment"
         android:label="AddTaskFragment"
         tools:layout="@layout/fragment_add_task"
         >
@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/editTaskFragment"
-        android:name="com.dirion.walltechtodo.view.features.edit_task.EditTaskFragment"
+        android:name="com.dirion.walltechtodo.view.features.edit_order.EditOrderFragment"
         android:label="EditTaskFragment"
         tools:layout="@layout/fragment_edit_task"
         >
@@ -104,7 +104,7 @@
     </fragment>
     <fragment
         android:id="@+id/tasksFragment"
-        android:name="com.dirion.walltechtodo.view.features.tasks.TasksFragment"
+        android:name="com.dirion.walltechtodo.view.features.orders.OrdersFragment"
         android:label="TasksFragment"
         tools:layout="@layout/fragment_tasks"
         >
@@ -117,6 +117,21 @@
         <action
             android:id="@+id/action_tasksFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_tasksFragment_to_typographyFragment"
+            app:destination="@id/typographyFragment" />
+        <action
+            android:id="@+id/action_tasksFragment_to_lkFragment"
+            app:destination="@id/lkFragment" />
+        <action
+            android:id="@+id/action_tasksFragment_to_customersFragment"
+            app:destination="@id/customersFragment" />
+        <action
+            android:id="@+id/action_tasksFragment_to_employersFragment"
+            app:destination="@id/employersFragment" />
+        <action
+            android:id="@+id/action_tasksFragment_to_myOrdersFragment"
+            app:destination="@id/myOrdersFragment" />
     </fragment>
     <fragment
         android:id="@+id/volumeFragment"
@@ -137,6 +152,103 @@
         <action
             android:id="@+id/action_nameFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/typographyFragment"
+        android:name="com.dirion.walltechtodo.view.features.typography.TypographyFragment"
+        android:label="TypographyFragment" >
+        <action
+            android:id="@+id/action_typographyFragment_to_customersFragment"
+            app:destination="@id/customersFragment" />
+        <action
+            android:id="@+id/action_typographyFragment_to_lkFragment"
+            app:destination="@id/lkFragment" />
+        <action
+            android:id="@+id/action_typographyFragment_to_employersFragment"
+            app:destination="@id/employersFragment" />
+        <action
+            android:id="@+id/action_typographyFragment_to_myOrdersFragment"
+            app:destination="@id/myOrdersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lkFragment"
+        android:name="com.dirion.walltechtodo.view.features.lk.LkFragment"
+        android:label="LkFragment" >
+        <action
+            android:id="@+id/action_lkFragment_to_tasksFragment"
+            app:destination="@id/tasksFragment" />
+        <action
+            android:id="@+id/action_lkFragment_to_customersFragment"
+            app:destination="@id/customersFragment" />
+        <action
+            android:id="@+id/action_lkFragment_to_typographyFragment"
+            app:destination="@id/typographyFragment" />
+        <action
+            android:id="@+id/action_lkFragment_to_employersFragment"
+            app:destination="@id/employersFragment" />
+        <action
+            android:id="@+id/action_lkFragment_to_myOrdersFragment"
+            app:destination="@id/myOrdersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customersFragment"
+        android:name="com.dirion.walltechtodo.view.features.customers.CustomersFragment"
+        android:label="CustomersFragment" >
+        <action
+            android:id="@+id/action_customersFragment_to_tasksFragment"
+            app:destination="@id/tasksFragment" />
+        <action
+            android:id="@+id/action_customersFragment_to_lkFragment"
+            app:destination="@id/lkFragment" />
+        <action
+            android:id="@+id/action_customersFragment_to_typographyFragment"
+            app:destination="@id/typographyFragment" />
+        <action
+            android:id="@+id/action_customersFragment_to_employersFragment"
+            app:destination="@id/employersFragment" />
+        <action
+            android:id="@+id/action_customersFragment_to_myOrdersFragment"
+            app:destination="@id/myOrdersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/employersFragment"
+        android:name="com.dirion.walltechtodo.view.features.employers.EmployersFragment"
+        android:label="EmployersFragment" >
+        <action
+            android:id="@+id/action_employersFragment_to_tasksFragment"
+            app:destination="@id/tasksFragment" />
+        <action
+            android:id="@+id/action_employersFragment_to_lkFragment"
+            app:destination="@id/lkFragment" />
+        <action
+            android:id="@+id/action_employersFragment_to_customersFragment"
+            app:destination="@id/customersFragment" />
+        <action
+            android:id="@+id/action_employersFragment_to_typographyFragment"
+            app:destination="@id/typographyFragment" />
+        <action
+            android:id="@+id/action_employersFragment_to_myOrdersFragment"
+            app:destination="@id/myOrdersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myOrdersFragment"
+        android:name="com.dirion.walltechtodo.view.features.my_orders.MyOrdersFragment"
+        android:label="MyOrdersFragment" >
+        <action
+            android:id="@+id/action_myOrdersFragment_to_tasksFragment"
+            app:destination="@id/tasksFragment" />
+        <action
+            android:id="@+id/action_myOrdersFragment_to_lkFragment"
+            app:destination="@id/lkFragment" />
+        <action
+            android:id="@+id/action_myOrdersFragment_to_customersFragment"
+            app:destination="@id/customersFragment" />
+        <action
+            android:id="@+id/action_myOrdersFragment_to_typographyFragment"
+            app:destination="@id/typographyFragment" />
+        <action
+            android:id="@+id/action_myOrdersFragment_to_employersFragment"
+            app:destination="@id/employersFragment" />
     </fragment>
 
 </navigation>

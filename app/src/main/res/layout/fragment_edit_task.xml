@@ -4,7 +4,9 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:scrollbars="vertical"
+    >
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -18,17 +20,17 @@
             android:layout_height="match_parent"
             android:layout_marginStart="18dp"
             android:gravity="center"
-            android:text="Add a Task"
+            android:text="Редактировать Заказ"
             android:textColor="@color/black"
-            android:textSize="28sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvSaveTask"
+            android:id="@+id/tvSaveOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|end"
-            android:text="Save"
+            android:text="Сохранить"
             android:textSize="18sp"
             android:layout_marginEnd="18dp"
             />
@@ -37,28 +39,10 @@
 
     </FrameLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="60dp"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etTaskName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter a task name"
-            android:textColorHint="#A6A0A0"
-            >
-
-        </com.google.android.material.textfield.TextInputEditText>
-
-    </com.google.android.material.textfield.TextInputLayout>
 
 
-    <FrameLayout
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
@@ -66,20 +50,387 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         >
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/statusList"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+
             android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_carousel"
             >
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <FrameLayout
+                android:id="@+id/flAtDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvAtDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Дата принятия"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/etAtDate"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:hint="Дата"
+                    android:textSize="18sp"
+                    android:layout_gravity="end"
+
+                    />
+
+            </FrameLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <FrameLayout
+                android:id="@+id/flCoDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvCoDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Дата завершения"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/etCoDate"
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:hint="Дата"
+                    android:textSize="18sp"
+                    android:layout_gravity="end"
+
+                    />
+
+            </FrameLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <FrameLayout
+                android:id="@+id/flCustomer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvCustomer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Заказчик"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    />
+
+                <Spinner
+                    android:id="@+id/spnCustomer"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:hint="паспорт"
+                    android:textSize="18sp"
+                    android:layout_gravity="end"
+
+                    />
+
+            </FrameLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <FrameLayout
+                android:id="@+id/flEdition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvEdition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Издатель"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/etEdition"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:hint="издатель"
+                    android:textSize="18sp"
+                    android:layout_gravity="end"
+
+                    />
+
+            </FrameLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <FrameLayout
+                android:id="@+id/flUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Сотрудник"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    />
+
+                <Spinner
+                    android:id="@+id/spnUser"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:hint="сотрудник"
+                    android:textSize="18sp"
+                    android:layout_gravity="end"
+
+                    />
+
+            </FrameLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <FrameLayout
+                android:id="@+id/flFormat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvFormat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Формат"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    />
+
+                <Spinner
+                    android:id="@+id/spnFromat"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:hint="сотрудник"
+                    android:textSize="18sp"
+                    android:layout_gravity="end"
+
+                    />
+
+            </FrameLayout>
 
 
-    </FrameLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <FrameLayout
+                android:id="@+id/flPages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvPages"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Страницы"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/etPages"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:hint="кол-во"
+                    android:textSize="18sp"
+                    android:layout_gravity="end"
+
+                    />
+
+            </FrameLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <FrameLayout
+                android:id="@+id/flPaperType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvPaperType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Тип Бумаги"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/etPaperType"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:hint="тип"
+                    android:textSize="18sp"
+                    android:layout_gravity="end"
+
+                    />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/flprepayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvPrepayment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Предоплата"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    />
+
+                <Spinner
+                    android:id="@+id/spnPrepayment"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:hint="Да/Не"
+                    android:textSize="18sp"
+                    android:layout_gravity="end"
+
+                    />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/flPrinting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvPrinting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Тираж"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/etPrinting"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:hint="кол-во"
+                    android:textSize="18sp"
+                    android:layout_gravity="end"
+
+                    />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/flProduct_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvProduct_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Цена"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/etProduct_price"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:hint="сумма"
+                    android:textSize="18sp"
+                    android:layout_gravity="end"
+
+                    />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/flProduct_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvProduct_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Тип"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/etProduct_type"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:hint="плакат"
+                    android:textSize="18sp"
+                    android:layout_gravity="end"
+
+                    />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/flTypography"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvTypography"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Типография"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    />
+
+                <Spinner
+                    android:id="@+id/spnTypography"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:hint="сотрудник"
+                    android:textSize="18sp"
+                    android:layout_gravity="end"
+
+                    />
+
+
+            </FrameLayout>
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
 
 
 

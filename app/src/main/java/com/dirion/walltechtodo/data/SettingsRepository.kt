@@ -57,17 +57,13 @@ class SettingsRepository @Inject constructor(
     }
 
     override fun saveNotes(notes: String) {
-        sharedPrefsHelper.writer
-            .putString(LocalDataSource.NOTES, notes)
-            .commit()
+        TODO("Not yet implemented")
     }
 
     override fun getNotes(): String {
-        return sharedPrefsHelper.reader
-            .getString(LocalDataSource.NOTES, "")
-            .orEmpty()
-
+        TODO("Not yet implemented")
     }
+
 
     override fun saveNames(firstName: String, familyName: String) {
         val pair = Pair(firstName, familyName)
@@ -87,13 +83,10 @@ class SettingsRepository @Inject constructor(
     }
 
     override fun saveVolumeValue(value: Float) {
-        sharedPrefsHelper.writer
-            .putFloat(LocalDataSource.VOLUME, value)
-            .commit()
+
     }
 
     override fun getVolumeValue(): Float {
-        return sharedPrefsHelper.reader
-            .getFloat(LocalDataSource.VOLUME, 0f)
+      return 0f
     }
 }

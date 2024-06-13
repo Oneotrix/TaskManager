@@ -3,6 +3,7 @@ plugins {
     alias(core.plugins.kotlin.android)
     alias(core.plugins.kotlin.serialization)
     alias(core.plugins.kotlin.kapt)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -41,6 +42,7 @@ android {
 }
 
 dependencies {
+    implementation("com.google.firebase:firebase-firestore:25.0.0")
     kapt(core.dagger.compiler)
     kapt(storage.room.compiler)
 

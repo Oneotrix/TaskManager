@@ -26,11 +26,11 @@ class NetworkDataSource @Inject constructor(
 ) : INetworkDataSource {
 
     private val username by lazy {
-        sharedPrefsHelper.reader.getString(LocalDataSource.USERNAME, null)
+        ""
     }
 
     private val password by lazy {
-        sharedPrefsHelper.reader.getString(LocalDataSource.PASSWORD, null)
+        ""
     }
 
 

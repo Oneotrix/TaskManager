@@ -2,6 +2,9 @@ package com.dirion.walltechtodo.di.app.modules.dependency
 
 import android.util.Log
 import com.dirion.walltechtodo.data.ApiService
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -65,5 +68,10 @@ class NetworkDependencyModule {
         val interceptor = HttpLoggingInterceptor { message -> Log.d("OkHttp", message) }
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         return interceptor
+    }
+
+    @Provides
+    fun firestore(): FirebaseFirestore {
+        return Firebase.firestore
     }
 }

@@ -20,7 +20,7 @@
             android:layout_marginStart="30dp"
             android:textSize="32sp"
             android:textStyle="bold"
-            android:text="Tasks"
+            android:text="Заказы"
             />
 
 

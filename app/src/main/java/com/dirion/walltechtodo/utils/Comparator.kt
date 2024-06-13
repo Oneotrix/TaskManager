@@ -1,67 +1,27 @@
 package com.dirion.walltechtodo.utils
 
 import androidx.recyclerview.widget.DiffUtil
-import com.dirion.walltechtodo.view.features.add_task.recycler.StatusVhModel
+import com.dirion.walltechtodo.data.models.network.rest.CLIENT
+import com.dirion.walltechtodo.data.models.network.rest.ORDER
+import com.dirion.walltechtodo.data.models.network.rest.TIPOGRAPHY
+import com.dirion.walltechtodo.data.models.network.rest.USER
 import com.dirion.walltechtodo.view.features.notification.NotificationModel
-import com.dirion.walltechtodo.view.features.tasks.TaskModel
+import com.dirion.walltechtodo.view.features.orders.OrderModel
 
 object Comparator {
 
-    val tasksListDiffUtil = object: DiffUtil.ItemCallback<TaskModel>() {
-        override fun areItemsTheSame(oldItem: TaskModel, newItem: TaskModel): Boolean {
+    val ordersListDiffUtil = object: DiffUtil.ItemCallback<OrderModel>() {
+        override fun areItemsTheSame(oldItem: OrderModel, newItem: OrderModel): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
 
-        override fun areContentsTheSame(oldItem: TaskModel, newItem: TaskModel) =
-            oldItem.status == newItem.status &&
-            oldItem.title == newItem.title &&
-            oldItem.id == newItem.id
+        override fun areContentsTheSame(oldItem: OrderModel, newItem: OrderModel): Boolean =
+            oldItem.selectCustomer == newItem.selectCustomer &&
+            oldItem.product_type == newItem.product_type &&
+            oldItem.acceptance_date == newItem.acceptance_date
     }
 
-    val addTaskDiffUtil = object: DiffUtil.ItemCallback<StatusVhModel>() {
-        override fun areItemsTheSame(oldItem: StatusVhModel, newItem: StatusVhModel): Boolean {
-            return oldItem.status == newItem.status
-        }
 
-        override fun areContentsTheSame(oldItem: StatusVhModel, newItem: StatusVhModel): Boolean {
-            return oldItem.isChecked == newItem.isChecked
-        }
-
-
-        override fun getChangePayload(oldItem: StatusVhModel, newItem: StatusVhModel): Any? {
-            return when(oldItem.isChecked == newItem.isChecked) {
-                true -> super.getChangePayload(oldItem, newItem)
-                false -> AddTaskPayload.Switcher(newItem.isChecked)
-            }
-        }
-    }
-
-    val updateTaskDiffUtil = object: DiffUtil.ItemCallback<com.dirion.walltechtodo.view.features.edit_task.recycler.StatusVhModel>() {
-        override fun areItemsTheSame(
-            oldItem: com.dirion.walltechtodo.view.features.edit_task.recycler.StatusVhModel,
-            newItem: com.dirion.walltechtodo.view.features.edit_task.recycler.StatusVhModel
-        ): Boolean {
-            return oldItem.status == newItem.status
-        }
-
-        override fun areContentsTheSame(
-            oldItem: com.dirion.walltechtodo.view.features.edit_task.recycler.StatusVhModel,
-            newItem: com.dirion.walltechtodo.view.features.edit_task.recycler.StatusVhModel
-        ): Boolean {
-            return oldItem.isChecked == newItem.isChecked
-        }
-
-        override fun getChangePayload(
-            oldItem: com.dirion.walltechtodo.view.features.edit_task.recycler.StatusVhModel,
-            newItem: com.dirion.walltechtodo.view.features.edit_task.recycler.StatusVhModel
-        ): Any? {
-            return when(oldItem.isChecked == newItem.isChecked) {
-                true -> super.getChangePayload(oldItem, newItem)
-                false -> AddTaskPayload.Switcher(newItem.isChecked)
-            }
-        }
-
-    }
 
     val notificationDiffUtil = object: DiffUtil.ItemCallback<NotificationModel.SwitcherModel>() {
         override fun areItemsTheSame(
@@ -80,6 +40,52 @@ object Comparator {
 
 
     }
+
+    val typographyDU = object : DiffUtil.ItemCallback<TIPOGRAPHY>() {
+        override fun areItemsTheSame(oldItem: TIPOGRAPHY, newItem: TIPOGRAPHY): Boolean {
+            return true
+        }
+
+        override fun areContentsTheSame(oldItem: TIPOGRAPHY, newItem: TIPOGRAPHY): Boolean {
+            return true
+        }
+
+
+    }
+
+    val customersDU = object : DiffUtil.ItemCallback<CLIENT>() {
+        override fun areItemsTheSame(oldItem: CLIENT, newItem: CLIENT): Boolean {
+            return  oldItem == newItem
+        }
+
+        override fun areContentsTheSame(oldItem: CLIENT, newItem: CLIENT): Boolean {
+            return  oldItem == newItem
+        }
+
+    }
+
+    val employersDU = object : DiffUtil.ItemCallback<USER>() {
+        override fun areItemsTheSame(oldItem: USER, newItem: USER): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(oldItem: USER, newItem: USER): Boolean {
+            return oldItem == newItem
+        }
+
+    }
+
+    val orderDU = object : DiffUtil.ItemCallback<ORDER>() {
+        override fun areItemsTheSame(oldItem: ORDER, newItem: ORDER): Boolean {
+            return true
+        }
+
+        override fun areContentsTheSame(oldItem: ORDER, newItem: ORDER): Boolean {
+            return true
+        }
+
+    }
+
 
     sealed interface AddTaskPayload {
         data class Switcher(val isChecked: Boolean) : AddTaskPayload

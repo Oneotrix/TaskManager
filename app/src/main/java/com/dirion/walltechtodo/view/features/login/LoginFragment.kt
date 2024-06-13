@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.dirion.walltechtodo.App
@@ -55,8 +56,8 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::in
         viewModel.events
             .onEach { event->
                 when(event) {
-                    is LoginViewModel.Event.LoginSuccess -> navigateToTasks()
-                    is LoginViewModel.Event.LoginError -> showErrorSnackbar(event.message)
+                    is LoginViewModel.Event.LoginSuccess -> navigateToTasks(event.role)
+                    is LoginViewModel.Event.LoginError -> showErrorSnackbar("Неверный логин или пароль")
                 }
             }
             .launchIn(lifecycleScope)
@@ -75,9 +76,11 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::in
         }
     }
 
-    private fun navigateToTasks() {
+    private fun navigateToTasks(role: Int) {
+        val bundle = Bundle().apply { putInt("role", role) }
         MainActivity.navigationComponent.navigationController()
-            .navigate(R.id.action_loginFragment_to_tasksFragment)
+            .navigate(R.id.action_loginFragment_to_tasksFragment, bundle)
+
     }
 
     private fun showErrorSnackbar(message: String) {
